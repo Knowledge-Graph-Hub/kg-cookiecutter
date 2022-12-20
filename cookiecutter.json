@@ -1,0 +1,13 @@
+{
+    "project_name": "kg-projectX",
+    "__project_slug": "{{ cookiecutter.project_name|lower()|replace(' ', '_')|replace('-', '_') }}",
+    "project_description": "This is the project description.",
+    "min_python_version": "3.9",
+    "file_name": "main",
+    "greeting_recipient": "World",
+    "full_name": "Harshad Hegde",
+    "email": "hhegde@lbl.gov",
+    "__author": "{{cookiecutter.full_name}} <{{cookiecutter.email}}>",
+    "license": ["MIT", "BSD-3", "GNU GPL v3.0", "Apache Software License 2.0"],
+    "github_token_for_doc_deployment": "GH_TOKEN"
+}
