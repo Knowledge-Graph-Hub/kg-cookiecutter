@@ -4,11 +4,12 @@ from {{cookiecutter.__project_slug}}.transform_utils.ontology import OntologyTra
 from {{cookiecutter.__project_slug}}.transform_utils.ontology.ontology_transform import ONTOLOGIES
 
 DATA_SOURCES = {
-    "MondoTransform": OntologyTransform,
-    "ChebiTransform": OntologyTransform,
+    # "MondoTransform": OntologyTransform,
+    # "ChebiTransform": OntologyTransform,
     "HPOTransform": OntologyTransform,
-    "GOTransform": OntologyTransform,
-    "OGMSTransform": OntologyTransform,
+    "ENVOTransform": OntologyTransform,
+    # "GOTransform": OntologyTransform,
+    # "OGMSTransform": OntologyTransform,
     # "DrugCentralTransform": DrugCentralTransform,
     # "OrphanetTransform": OrphanetTransform,
     # "OMIMTransform": OMIMTransform,

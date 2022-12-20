@@ -27,11 +27,11 @@
   url: http://purl.obolibrary.org/obo/envo.json
   local_name: envo.json
 #
-# CHEBI
+# HP
 #
 -
-  url: http://purl.obolibrary.org/obo/chebi.owl.gz
-  local_name: chebi.owl.gz
+  url: http://purl.obolibrary.org/obo/hp.json
+  local_name: hp.json
 
 # **** Data sources ****
 #
