@@ -11,11 +11,11 @@ from {{cookiecutter.__project_slug}}.transform import DATA_SOURCES
 
 
 @click.group()
-def cli():
+def main():
     pass
 
 
-@cli.command()
+@main.command()
 @click.option("yaml_file", "-y", required=True, default="download.yaml",
               type=click.Path(exists=True))
 @click.option("output_dir", "-o", required=True, default="data/raw")
@@ -38,7 +38,7 @@ def download(*args, **kwargs) -> None:
     return None
 
 
-@cli.command()
+@main.command()
 @click.option("input_dir", "-i", default="data/raw", type=click.Path(exists=True))
 @click.option("output_dir", "-o", default="data/transformed")
 @click.option("sources", "-s", default=None, multiple=True,
@@ -58,7 +58,7 @@ def transform(*args, **kwargs) -> None:
     return None
 
 
-@cli.command()
+@main.command()
 @click.option('yaml', '-y', default="merge.yaml", type=click.Path(exists=True))
 @click.option('processes', '-p', default=1, type=int)
 def merge(yaml: str, processes: int) -> None:
@@ -71,7 +71,7 @@ def merge(yaml: str, processes: int) -> None:
     load_and_merge(yaml, processes)
 
 
-@cli.command()
+@main.command()
 @click.option("yaml", "-y", required=True, default=None, multiple=False)
 @click.option("output_dir", "-o", default="data/queries/")
 def query(yaml: str, output_dir: str,
@@ -95,7 +95,7 @@ def query(yaml: str, output_dir: str,
     result_dict_to_tsv(result_dict, outfile)
 
 
-@cli.command()
+@main.command()
 @click.option("nodes", "-n", help="nodes KGX TSV file", default="data/merged/nodes.tsv",
               type=click.Path(exists=True))
 @click.option("edges", "-e", help="edges KGX TSV file", default="data/merged/edges.tsv",
@@ -145,4 +145,4 @@ def holdouts(*args, **kwargs) -> None:
 
 
 if __name__ == "__main__":
-    cli()
+    main()
