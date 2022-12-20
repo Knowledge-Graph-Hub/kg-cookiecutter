@@ -1,7 +1,7 @@
 """{{cookiecutter.project_name}} package."""
 from importlib import metadata
 from .download import download
-from .transform_utils.transform import transform
+from .transform_utils import transform
                 
 try:
     __version__ = metadata.version(__name__)
