@@ -6,27 +6,27 @@ configuration:
 merged_graph:
   name: project_name graph
   source:
-    chebi:
-      name: "CHEBI"
+    hp:
+      name: "HP"
       input:
         format: tsv
         filename:
-          - data/transformed/ontologies/chebi_nodes.tsv
-          - data/transformed/ontologies/chebi_edges.tsv
+          - data/transformed/ontologies/HPTransform_nodes.tsv
+          - data/transformed/ontologies/HPTransform_edges.tsv
     envo:
       name: "ENVO"
       input:
         format: tsv
         filename:
-          - data/transformed/ontologies/envo_nodes.tsv
-          - data/transformed/ontologies/envo_edges.tsv
-    chebi_to_reactome:
-      name: "CHEBI to Reactome Pathways"
-      input:
-        format: tsv
-        filename:
-          - data/transformed/reactome/chebi2reactome_nodes.tsv
-          - data/transformed/reactome/chebi2reactome_edges.tsv
+          - data/transformed/ontologies/EnvoTransform_nodes.tsv
+          - data/transformed/ontologies/EnvoTransform_edges.tsv
+    # chebi_to_reactome:
+    #   name: "CHEBI to Reactome Pathways"
+    #   input:
+    #     format: tsv
+    #     filename:
+    #       - data/transformed/reactome/chebi2reactome_nodes.tsv
+    #       - data/transformed/reactome/chebi2reactome_edges.tsv
   operations:
     - name: kgx.graph_operations.summarize_graph.generate_graph_stats
       args:
