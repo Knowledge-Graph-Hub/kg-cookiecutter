@@ -9,12 +9,12 @@ from ..transform import Transform
 
 
 ONTOLOGIES = {
-    #'HpTransform': 'hp.json',
+    'HpTransform': 'hp.json',
     #'GoTransform': 'go-plus.json',
-    'NCBITransform':  'ncbitaxon.json',
-    'ChebiTransform': 'chebi.json',
+    # 'NCBITransform':  'ncbitaxon.json',
+    # 'ChebiTransform': 'chebi.json',
     'EnvoTransform': 'envo.json',
-    'GoTransform': 'go.json'
+    # 'GoTransform': 'go.json'
 }
 
 

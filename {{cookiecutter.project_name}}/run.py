@@ -4,7 +4,7 @@ import os
 
 import click
 from {{cookiecutter.__project_slug}} import download as kg_download
-from {{cookiecutter.__project_slug}} import transform as kg_transform
+from {{cookiecutter.__project_slug}}.transform import transform as kg_transform
 from {{cookiecutter.__project_slug}}.merge_utils.merge_kg import load_and_merge
 from {{cookiecutter.__project_slug}}.query import run_query, parse_query_yaml, result_dict_to_tsv
 from {{cookiecutter.__project_slug}}.transform import DATA_SOURCES

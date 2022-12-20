@@ -25,8 +25,8 @@ class Transform:
         self.edge_header = ["subject", "edge_label", "object", "relation", "provided_by"]
 
         # default dirs
-        self.input_base_dir = input_dir if input_dir else self.DEFAULT_INPUT_DIR
-        self.output_base_dir = output_dir if output_dir else self.DEFAULT_OUTPUT_DIR
+        self.input_base_dir = Path(input_dir) if input_dir else self.DEFAULT_INPUT_DIR
+        self.output_base_dir = Path(output_dir) if output_dir else self.DEFAULT_OUTPUT_DIR
         self.output_dir = self.output_base_dir / source_name
 
         # default filenames
@@ -35,7 +35,7 @@ class Transform:
         self.output_json_file = self.output_dir / "nodes_edges.json"
         self.subset_terms_file = self.input_base_dir / "subset_terms.tsv"
 
-        Path.mkdir(self.output_dir, exist_ok=True)
+        Path.mkdir(self.output_dir, exist_ok=True, parents=True)
 
         if nlp:
 
@@ -50,11 +50,11 @@ class Transform:
                 shutil.rmtree(self.nlp_input_dir)
                 shutil.rmtree(self.nlp_stopwords_dir)
 
-            Path.mkdir(self.nlp_dir, exist_ok=True)
-            Path.mkdir(self.nlp_input_dir, exist_ok=True)
-            Path.mkdir(self.nlp_output_dir, exist_ok=True)
-            Path.mkdir(self.nlp_terms_dir, exist_ok=True)
-            Path.mkdir(self.nlp_stopwords_dir, exist_ok=True)
+            Path.mkdir(self.nlp_dir, exist_ok=True, parents=True)
+            Path.mkdir(self.nlp_input_dir, exist_ok=True, parents=True)
+            Path.mkdir(self.nlp_output_dir, exist_ok=True, parents=True)
+            Path.mkdir(self.nlp_terms_dir, exist_ok=True, parents=True)
+            Path.mkdir(self.nlp_stopwords_dir, exist_ok=True, parents=True)
 
             with open("stopwords.yaml", "r") as stop_list:
                 doc = yaml.safe_load(stop_list, Loader=yaml.FullLoader)
