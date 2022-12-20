@@ -25,9 +25,6 @@ myst-parser = {version = "^0.18.1", extras = ["docs"]}
 pytest = "^7.1.2"
 parameterized = "^0.8.1"
 
-[tool.poetry.scripts]
-{{cookiecutter.project_name}} = "{{cookiecutter.project_name}}.cli:main"
-
 [tool.poetry.extras]
 docs = [
     "sphinx",
