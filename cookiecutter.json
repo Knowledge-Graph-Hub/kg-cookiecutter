@@ -3,7 +3,6 @@
     "__project_slug": "{{ cookiecutter.project_name|lower()|replace(' ', '_')|replace('-', '_') }}",
     "project_description": "This is the project description.",
     "min_python_version": "3.9",
-    "file_name": "main",
     "greeting_recipient": "World",
     "full_name": "Harshad Hegde",
     "email": "hhegde@lbl.gov",
