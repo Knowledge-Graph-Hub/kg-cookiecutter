@@ -39,5 +39,5 @@
 # pre-transformed CHEBI to Pathway relationships
 #
 # -
-#   url: https://reactome.org/download/current/ChEBI2Reactome_PE_Pathway.txt
-#   local_name: ChEBI2Reactome_PE_Pathway.txt
+#   url: https://github.com/phenopackets/phenopacket-schema/blob/master/src/test/python/covid19.json
+#   local_name: covid19.json
