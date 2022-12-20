@@ -5,7 +5,7 @@ from typing import Optional
 #from kgx.transformer import Transformer
 from kgx.cli.cli_utils import transform
 
-from transform_utils.transform import Transform
+from ..transform import Transform
 
 
 ONTOLOGIES = {
