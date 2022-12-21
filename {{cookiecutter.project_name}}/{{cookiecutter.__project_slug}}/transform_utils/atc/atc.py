@@ -9,7 +9,7 @@ import gzip
 import os
 import shutil
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Union
 
 from koza.cli_runner import transform_source  # type: ignore
 
@@ -38,7 +38,7 @@ class ATCTransform(Transform):
         source_name = "atc"
         super().__init__(source_name, input_dir, output_dir)
 
-    def run(self, atc_file: Optional[Path] = None) -> None:  # type: ignore
+    def run(self, atc_file: Union[Optional[Path], Optional[str]] = None) -> None:
         """Set up the ATC for Koza and call the parse function."""
         if atc_file:
             for source in [atc_file]:
