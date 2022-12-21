@@ -27,7 +27,7 @@ TRANSLATION_TABLE = "./{{cookiecutter.__project_slug}}/transform_utils/translati
 
 
 class ATCTransform(Transform):
-    """This transform ingests the ATC CSV file.It is transformed to KGX-format node and edge lists."""
+    """This transform ingests the ATC CSV file & transforms to KGX-format node and edge lists."""
 
     def __init__(self, input_dir: Optional[Path] = None, output_dir: Optional[Path] = None) -> None:
         """Instantiate the transform.
@@ -39,9 +39,7 @@ class ATCTransform(Transform):
         super().__init__(source_name, input_dir, output_dir)
 
     def run(self, atc_file: Optional[Path] = None) -> None:  # type: ignore
-        """
-        Set up the ATC for Koza and call the parse function.
-        """
+        """Set up the ATC for Koza and call the parse function."""
         if atc_file:
             for source in [atc_file]:
                 k = str(source).split(".")[0]
@@ -59,6 +57,7 @@ class ATCTransform(Transform):
         :param name: Name of the resource
         :param data_file: Data file of resource.
         :param source: Source name.
+        :raises Exception:ValueError if source file unrecognized.
         """
         print(f"Parsing {data_file}")
         config = Path(__file__).resolve().parent / ATC_CONFIGS[source]
