@@ -1,19 +1,17 @@
-
 from pathlib import Path
 from typing import Optional
 
-#from kgx.transformer import Transformer
+# from kgx.transformer import Transformer
 from kgx.cli.cli_utils import transform
 
 from ..transform import Transform
 
-
 ONTOLOGIES = {
-    'HpTransform': 'hp.json',
+    "HpTransform": "hp.json",
     #'GoTransform': 'go-plus.json',
     # 'NCBITransform':  'ncbitaxon.json',
     # 'ChebiTransform': 'chebi.json',
-    'EnvoTransform': 'envo.json',
+    "EnvoTransform": "envo.json",
     # 'GoTransform': 'go.json'
 }
 
@@ -23,6 +21,7 @@ class OntologyTransform(Transform):
     OntologyTransform parses an Obograph JSON form of an Ontology into nodes nad edges.
 
     """
+
     def __init__(self, input_dir: Path = None, output_dir: Path = None):
         source_name = "ontologies"
         super().__init__(source_name, input_dir, output_dir)
@@ -35,7 +34,7 @@ class OntologyTransform(Transform):
         """
 
         if data_file:
-            k = data_file.split('.')[0]
+            k = data_file.split(".")[0]
             data_file = self.input_base_dir / data_file
             self.parse(k, data_file, k)
         else:
@@ -46,7 +45,7 @@ class OntologyTransform(Transform):
 
     def parse(self, name: str, data_file: str, source: str) -> None:
         """Processes the data_file.
-        
+
         :param name: Name of the ontology
         :param data_file: data file to parse
         :param source: Source name
@@ -55,4 +54,9 @@ class OntologyTransform(Transform):
 
         print(f"Parsing {data_file}")
 
-        transform(inputs=[data_file], input_format='obojson', output= self.output_dir / name, output_format='tsv')
+        transform(
+            inputs=[data_file],
+            input_format="obojson",
+            output=self.output_dir / name,
+            output_format="tsv",
+        )

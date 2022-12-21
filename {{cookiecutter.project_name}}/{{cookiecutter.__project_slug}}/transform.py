@@ -1,5 +1,6 @@
 import logging
 from typing import List
+
 from {{cookiecutter.__project_slug}}.transform_utils.ontology import OntologyTransform
 from {{cookiecutter.__project_slug}}.transform_utils.ontology.ontology_transform import ONTOLOGIES
 
@@ -20,6 +21,7 @@ DATA_SOURCES = {
     # "STRINGTransform": STRINGTransform,
     # "ATCTransform": ATCTransform,
 }
+
 
 def transform(input_dir: str, output_dir: str, sources: List[str] = None) -> None:
     """Call scripts in kg_idg/transform/[source name]/ to

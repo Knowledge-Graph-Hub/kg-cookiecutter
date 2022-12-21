@@ -1,11 +1,13 @@
 import shutil
-from typing import Optional
 from pathlib import Path
+from typing import Optional
+
 import yaml
 
 
 class Transform:
     """Parent class for transforms, that sets up a lot of default file info"""
+
     DATA_DIR = Path(__file__).parent / "data"
     DEFAULT_INPUT_DIR = DATA_DIR / "raw"
     DEFAULT_OUTPUT_DIR = DATA_DIR / "transformed"
