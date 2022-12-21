@@ -59,6 +59,7 @@ class ATCTransform(Transform):
         :param name: Name of the resource
         :param data_file: Data file of resource.
         :param source: Source name.
+        :raises ValueError: If the source is unrecognized.
         """
         print(f"Parsing {data_file}")
         config = Path(__file__).parent / ATC_CONFIGS[source]
