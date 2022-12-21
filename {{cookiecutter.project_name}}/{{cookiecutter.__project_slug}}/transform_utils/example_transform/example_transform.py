@@ -18,6 +18,7 @@ from typing import Optional
 
 from transform_utils.transform import Transform
 
+
 class YourTransform(Transform):
     """Template for how the transform class would be designed."""
     def __init__(self, input_dir: str = None, output_dir: str = None):
