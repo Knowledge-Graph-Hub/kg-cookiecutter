@@ -25,7 +25,7 @@ class OntologyTransform(Transform):
         source_name = "ontologies"
         super().__init__(source_name, input_dir, output_dir)
 
-    def run(self, data_file: Optional[str] = None) -> None:
+    def run(self, data_file: Optional[Path] = None) -> None:
         """Transform an ontology.
 
         :param data_file: data file to parse
@@ -41,7 +41,7 @@ class OntologyTransform(Transform):
                 data_file = self.input_base_dir / ONTOLOGIES[k]
                 self.parse(k, data_file, k)
 
-    def parse(self, name: str, data_file: Optional[str], source: str) -> None:
+    def parse(self, name: str, data_file: Optional[Path], source: str) -> None:
         """Process the data_file.
 
         :param name: Name of the ontology
