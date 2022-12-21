@@ -21,23 +21,21 @@ Output these two files:
 
 
 class YourTransform(Transform):
-
     def __init__(self, input_dir: str = None, output_dir: str = None):
         source_name = "some_unique_name"
         super().__init__(source_name, input_dir, output_dir)
 
     def run(self, data_file: Optional[str] = None):
         # replace with downloaded data of for this source
-        input_file = os.path.join(
-            self.input_base_dir, "example_data.csv")  # must exist already
+        input_file = os.path.join(self.input_base_dir, "example_data.csv")  # must exist already
 
         # make directory in data/transformed
         os.makedirs(self.output_dir, exist_ok=True)
 
         # transform data, something like:
-        with open(input_file, 'r') as f, \
-                open(self.output_node_file, 'w') as node, \
-                open(self.output_edge_file, 'w') as edge:
+        with open(input_file, "r") as f, open(self.output_node_file, "w") as node, open(
+            self.output_edge_file, "w"
+        ) as edge:
 
             # write headers (change default node/edge headers if necessary
             node.write("\t".join(self.node_header) + "\n")
