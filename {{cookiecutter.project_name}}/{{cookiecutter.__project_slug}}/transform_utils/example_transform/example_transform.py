@@ -15,7 +15,7 @@ Output these two files:
 """
 import os
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Union
 
 from transform_utils.transform import Transform
 
@@ -28,7 +28,7 @@ class YourTransform(Transform):
         source_name = "some_unique_name"
         super().__init__(source_name, input_dir, output_dir)
 
-    def run(self, data_file: Optional[Path] = None):
+    def run(self, data_file: Union[Optional[Path], Optional[str]] = None):
         """Run the transformation."""
         # replace with downloaded data of for this source
         input_file = os.path.join(self.input_base_dir, "example_data.csv")  # must exist already

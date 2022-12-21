@@ -1,7 +1,7 @@
 """Transform utility module."""
 import shutil
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Union
 
 import yaml
 
@@ -81,7 +81,7 @@ class Transform:
 
             self.output_nlp_file = self.nlp_output_dir / "nlpOutput.tsv"
 
-    def run(self, data_file: Optional[Path] = None):
+    def run(self, data_file: Union[Optional[Path], Optional[str]] = None):
         """Run the transform.
 
         :param data_file: Input data file, defaults to None
