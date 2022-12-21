@@ -1,3 +1,4 @@
+"""Transform module."""
 import logging
 from typing import List
 
@@ -29,14 +30,9 @@ def transform(input_dir: str, output_dir: str, sources: List[str] = None) -> Non
     KGX can ingest directly, in either TSV or JSON format:
     https://github.com/biolink/kgx/blob/master/data-preparation.md
 
-    Args:
-        input_dir: A string pointing to the directory to import data from.
-        output_dir: A string pointing to the directory to output data to.
-        sources: A list of sources to transform.
-
-    Returns:
-        None.
-
+    :param input_dir: A string pointing to the directory to import data from.
+    :param output_dir: A string pointing to the directory to output data to.
+    :param sources: A list of sources to transform.
     """
     if not sources:
         # run all sources

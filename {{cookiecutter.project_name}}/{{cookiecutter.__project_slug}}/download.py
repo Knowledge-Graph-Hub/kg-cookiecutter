@@ -1,3 +1,4 @@
+"""Download resources from YAML file."""
 from kghub_downloader.download_utils import download_from_yaml  # type: ignore
 
 
