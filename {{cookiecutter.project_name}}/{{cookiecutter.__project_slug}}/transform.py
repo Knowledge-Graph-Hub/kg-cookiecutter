@@ -1,6 +1,6 @@
 """Transform module."""
 import logging
-from typing import List
+from typing import List, Optional
 
 from {{cookiecutter.__project_slug}}.transform_utils.ontology import OntologyTransform
 from {{cookiecutter.__project_slug}}.transform_utils.ontology.ontology_transform import ONTOLOGIES
@@ -24,7 +24,7 @@ DATA_SOURCES = {
 }
 
 
-def transform(input_dir: str, output_dir: str, sources: List[str] = None) -> None:
+def transform(input_dir: Optional[str], output_dir: Optional[str], sources: List[str] = None) -> None:
     """Transform based on resource and class declared in DATA_SOURCES.
     
     Call scripts in {{cookiecutter.__project_slug}}/transform/[source name]/ to

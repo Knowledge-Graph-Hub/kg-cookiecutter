@@ -21,7 +21,7 @@ from transform_utils.transform import Transform
 
 class YourTransform(Transform):
     """Template for how the transform class would be designed."""
-    def __init__(self, input_dir: str = None, output_dir: str = None):
+    def __init__(self, input_dir: Optional[str] = None, output_dir: Optional[str] = None):
         """Instatiation part."""
         source_name = "some_unique_name"
         super().__init__(source_name, input_dir, output_dir)

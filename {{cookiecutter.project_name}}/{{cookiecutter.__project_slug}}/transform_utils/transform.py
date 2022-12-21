@@ -20,7 +20,7 @@ class Transform:
     DEFAULT_NLP_STOPWORDS_DIR = DEFAULT_NLP_DIR / "stopwords"
 
     def __init__(
-        self, source_name, input_dir: Path = None, output_dir: Path = None, nlp: bool = False
+        self, source_name, input_dir: Optional[Path] = None, output_dir: Optional[Path] = None, nlp: bool = False
     ):
         """Instantiate Transform object.
 
@@ -67,7 +67,7 @@ class Transform:
             Path.mkdir(self.nlp_stopwords_dir, exist_ok=True, parents=True)
 
             with open("stopwords.yaml", "r") as stop_list:
-                doc = yaml.safe_load(stop_list, Loader=yaml.FullLoader)
+                doc = yaml.safe_load(stop_list) #, Loader=yaml.FullLoader)
                 stop_words = doc["English"]
 
             with open(self.nlp_stopwords_dir / "stopWords.txt", "w") as stop_terms:
