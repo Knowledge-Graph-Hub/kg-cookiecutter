@@ -105,7 +105,7 @@ To transform downloaded sources:
 python run.py transform
 ```
 
-By default, this will run all transforms defined in `transform.py` and save results to `data/transformed`.  Use the `-s` option with a transform name to run just one, e.g., `python run.py transform -s EnvoTransform`.
+By default, this will run all transforms defined in `transform.py` and save results to `data/transformed`.  Use `-s` option with a transform name to run just one, e.g., `python run.py transform -s EnvoTransform`.
 
 To build the merged graph:
 
