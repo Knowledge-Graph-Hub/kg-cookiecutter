@@ -25,7 +25,7 @@ DATA_SOURCES = {
 
 
 def transform(
-    input_dir: Optional[str], output_dir: Optional[str], sources: List[str] = None
+    input_dir: Optional[Path], output_dir: Optional[Path], sources: List[str] = None
 ) -> None:
     """Transform based on resource and class declared in DATA_SOURCES.
     

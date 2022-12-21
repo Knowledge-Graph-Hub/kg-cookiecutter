@@ -81,7 +81,7 @@ class Transform:
 
             self.output_nlp_file = self.nlp_output_dir / "nlpOutput.tsv"
 
-    def run(self, data_file: Optional[str] = None):
+    def run(self, data_file: Optional[Path] = None):
         """Run the transform.
 
         :param data_file: Input data file, defaults to None
