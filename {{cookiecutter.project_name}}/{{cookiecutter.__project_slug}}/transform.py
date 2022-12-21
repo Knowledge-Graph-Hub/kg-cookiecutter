@@ -5,6 +5,7 @@ from pathlib import Path
 
 from {{cookiecutter.__project_slug}}.transform_utils.ontology import OntologyTransform
 from {{cookiecutter.__project_slug}}.transform_utils.ontology.ontology_transform import ONTOLOGIES
+from {{cookiecutter.__project_slug}}.transform_utils.atc import ATCTransform
 
 DATA_SOURCES = {
     # "MondoTransform": OntologyTransform,
@@ -21,7 +22,7 @@ DATA_SOURCES = {
     # "TCRDTransform": TCRDTransform,
     # "ProteinAtlasTransform": ProteinAtlasTransform,
     # "STRINGTransform": STRINGTransform,
-    # "ATCTransform": ATCTransform,
+    "ATCTransform": ATCTransform,
 }
 
 
