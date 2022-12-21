@@ -66,7 +66,7 @@ class ATCTransform(Transform):
         # Decompress
         outname = name[:-3]
         outpath = self.input_base_dir / outname
-        with gzip.open(data_file, "rb") as data_file_gz:
+        with gzip.open(str(data_file), "rb") as data_file_gz:
             with open(outpath, "wb") as data_file_new:
                 shutil.copyfileobj(data_file_gz, data_file_new)
 
