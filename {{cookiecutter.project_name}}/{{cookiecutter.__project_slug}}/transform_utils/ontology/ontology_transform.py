@@ -1,6 +1,6 @@
 """Ontology transform module."""
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Union
 
 # from kgx.transformer import Transformer
 from kgx.cli.cli_utils import transform
@@ -25,7 +25,7 @@ class OntologyTransform(Transform):
         source_name = "ontologies"
         super().__init__(source_name, input_dir, output_dir)
 
-    def run(self, data_file: Optional[Path] = None) -> None:
+    def run(self, data_file: Union[Optional[Path], Optional[str]] = None) -> None:
         """Transform an ontology.
 
         :param data_file: data file to parse
