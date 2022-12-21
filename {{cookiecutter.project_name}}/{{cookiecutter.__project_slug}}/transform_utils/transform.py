@@ -7,7 +7,7 @@ import yaml
 
 
 class Transform:
-    """Parent class for transforms, that sets up a lot of default file info"""
+    """Parent class for transforms, that sets up a lot of default file info."""
 
     DATA_DIR = Path(__file__).parent / "data"
     DEFAULT_INPUT_DIR = DATA_DIR / "raw"
@@ -22,6 +22,13 @@ class Transform:
     def __init__(
         self, source_name, input_dir: Path = None, output_dir: Path = None, nlp: bool = False
     ):
+        """Instantiates Transform object.
+
+        :param source_name: Name of resource.
+        :param input_dir: Location of input directory, defaults to None
+        :param output_dir: Location of output directory, defaults to None
+        :param nlp: Boolean for possiblility of using NLP or not, defaults to False
+        """
         # default columns, can be appended to or overwritten as necessary
         self.source_name = source_name
         self.node_header = ["id", "name", "category"]
@@ -71,6 +78,10 @@ class Transform:
             self.output_nlp_file = self.nlp_output_dir / "nlpOutput.tsv"
 
     def run(self, data_file: Optional[str] = None):
+        """Run the transform.
+
+        :param data_file: Input data file, defaults to None
+        """
         pass
 
     def pass_through(self, nodes_file: str, edges_file: str) -> None:
