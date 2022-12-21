@@ -49,8 +49,6 @@ class OntologyTransform(Transform):
         :param source: Source name
         :return: None.
         """
-        print(f"Parsing {data_file}")
-
         transform(
             inputs=[data_file],
             input_format="obojson",
