@@ -47,7 +47,7 @@ class ATCTransform(Transform):
         if atc_file:
             for source in [atc_file]:
                 k = str(source).split(".")[0]
-                data_file = self.input_bas_dir / source
+                data_file = self.input_base_dir / source
                 self.parse(k, data_file, k)
         else:
             for k in ATC_SOURCES.keys():

@@ -1,6 +1,6 @@
 """Transform module."""
 import logging
-from typing import List, Optional
+from typing import List, Optional, Union
 from pathlib import Path
 
 from {{cookiecutter.__project_slug}}.transform_utils.ontology import OntologyTransform
@@ -27,7 +27,7 @@ DATA_SOURCES = {
 
 
 def transform(
-    input_dir: Optional[Path], output_dir: Optional[Path], sources: List[str] = None
+    input_dir: Optional[Path], output_dir: Optional[Path], sources: List[Union[str, Path]] = None
 ) -> None:
     """Transform based on resource and class declared in DATA_SOURCES.
     
