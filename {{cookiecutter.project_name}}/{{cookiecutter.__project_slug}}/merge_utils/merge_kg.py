@@ -13,7 +13,7 @@ def parse_load_config(yaml_file: str) -> Dict:
     :return: Dict: The config as a dictionary.
     """
     with open(yaml_file) as yamlf:
-        config = yaml.safe_load(yamlf) #, Loader=yaml.FullLoader)
+        config = yaml.safe_load(yamlf)  # , Loader=yaml.FullLoader)
     return config
 
 
