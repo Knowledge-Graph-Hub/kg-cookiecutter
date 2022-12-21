@@ -39,9 +39,7 @@ class ATCTransform(Transform):
         super().__init__(source_name, input_dir, output_dir)
 
     def run(self, atc_file: Optional[Path] = None) -> None:  # type: ignore
-        """
-        Set up the ATC for Koza and call the parse function.
-        """
+        """Set up the ATC for Koza and call the parse function."""
         if atc_file:
             for source in [atc_file]:
                 k = str(source).split(".")[0]
