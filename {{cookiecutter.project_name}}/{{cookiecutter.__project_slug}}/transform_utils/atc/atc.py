@@ -27,7 +27,7 @@ TRANSLATION_TABLE = Path(__file__).parents[1] / "translation_table.yaml"
 
 
 class ATCTransform(Transform):
-    """This transform ingests the ATC CSV file.It is transformed to KGX-format node and edge lists."""
+    """This transform ingests the ATC CSV file & transforms to KGX-format node and edge lists."""
 
     def __init__(self, input_dir: Optional[Path] = None, output_dir: Optional[Path] = None) -> None:
         """Instantiate the transform.
