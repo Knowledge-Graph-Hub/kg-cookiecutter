@@ -32,7 +32,7 @@ class OntologyTransform(Transform):
         :return: None.
         """
         if data_file:
-            k = data_file.split(".")[0]
+            k = str(data_file).split(".")[0]
             data_file = self.input_base_dir / data_file
             self.parse(k, data_file, k)
         else:
