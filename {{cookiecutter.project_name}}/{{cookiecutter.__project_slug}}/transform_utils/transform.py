@@ -1,3 +1,4 @@
+"""Transform utility module."""
 import shutil
 from pathlib import Path
 from typing import Optional
@@ -73,15 +74,12 @@ class Transform:
         pass
 
     def pass_through(self, nodes_file: str, edges_file: str) -> None:
-        """
+        """Copy nodes and edges files to output directory.
 
-        Args:
-            nodes_file: nodes files to take from raw directory and put in transform
+        :param nodes_file: nodes files to take from raw directory and put in transform
                 directory
-            edges_file: edges files to take from raw directory and put in transform
+        :param edges_file: edges files to take from raw directory and put in transform
                 directory
-
-        Returns: None
         """
         for f in [nodes_file, edges_file]:
             shutil.copy(f, self.output_dir)
