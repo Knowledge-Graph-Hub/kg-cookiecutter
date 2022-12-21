@@ -14,8 +14,8 @@ Output these two files:
 - edges.tsv
 """
 import os
-from typing import Optional
 from pathlib import Path
+from typing import Optional
 
 from transform_utils.transform import Transform
 
