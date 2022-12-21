@@ -1,3 +1,4 @@
+"""Ontology transform module."""
 from pathlib import Path
 from typing import Optional
 
@@ -8,7 +9,7 @@ from ..transform import Transform
 
 ONTOLOGIES = {
     "HpTransform": "hp.json",
-    #'GoTransform': 'go-plus.json',
+    # 'GoTransform': 'go-plus.json',
     # 'NCBITransform':  'ncbitaxon.json',
     # 'ChebiTransform': 'chebi.json',
     "EnvoTransform": "envo.json",
@@ -17,22 +18,19 @@ ONTOLOGIES = {
 
 
 class OntologyTransform(Transform):
-    """
-    OntologyTransform parses an Obograph JSON form of an Ontology into nodes nad edges.
-
-    """
+    """OntologyTransform parses an Obograph JSON form of an Ontology into nodes nad edges."""
 
     def __init__(self, input_dir: Path = None, output_dir: Path = None):
+        """Instatiate object."""
         source_name = "ontologies"
         super().__init__(source_name, input_dir, output_dir)
 
     def run(self, data_file: Optional[str] = None) -> None:
-        """Method is called and performs needed transformations to process an ontology.
+        """Transform an ontology.
 
         :param data_file: data file to parse
         :return: None.
         """
-
         if data_file:
             k = data_file.split(".")[0]
             data_file = self.input_base_dir / data_file
@@ -44,14 +42,13 @@ class OntologyTransform(Transform):
                 self.parse(k, data_file, k)
 
     def parse(self, name: str, data_file: str, source: str) -> None:
-        """Processes the data_file.
+        """Process the data_file.
 
         :param name: Name of the ontology
         :param data_file: data file to parse
         :param source: Source name
         :return: None.
         """
-
         print(f"Parsing {data_file}")
 
         transform(

@@ -22,7 +22,7 @@ class Transform:
     def __init__(
         self, source_name, input_dir: Path = None, output_dir: Path = None, nlp: bool = False
     ):
-        """Instantiates Transform object.
+        """Instantiate Transform object.
 
         :param source_name: Name of resource.
         :param input_dir: Location of input directory, defaults to None

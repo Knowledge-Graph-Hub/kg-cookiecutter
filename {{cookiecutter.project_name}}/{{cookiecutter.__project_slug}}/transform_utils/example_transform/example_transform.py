@@ -44,6 +44,7 @@ class YourTransform(Transform):
 
             # transform data, something like:
             for line in f:
+                print(line)
                 pass
                 # transform line into nodes and edges
                 # node.write(this_node1)
