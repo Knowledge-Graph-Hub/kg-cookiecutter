@@ -1,6 +1,7 @@
 """Transform module."""
 import logging
 from typing import List, Optional
+from pathlib import Path
 
 from {{cookiecutter.__project_slug}}.transform_utils.ontology import OntologyTransform
 from {{cookiecutter.__project_slug}}.transform_utils.ontology.ontology_transform import ONTOLOGIES
