@@ -55,7 +55,7 @@ class ATCTransform(Transform):
                 data_file = self.input_base_dir / name
                 self.parse(name, data_file, k)
 
-    def parse(self, name: str, data_file: str, source: str) -> None:
+    def parse(self, name: str, data_file: Optional[Path], source: str) -> None:
         """Transform ATC file with Koza. Need to decompress it first.
 
         :param name: Name of the resource
