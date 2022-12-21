@@ -44,9 +44,9 @@ class OntologyTransform(Transform):
     def parse(self, name: str, data_file: Optional[Path], source: str) -> None:
         """Process the data_file.
 
-        :param name: Name of the ontology
-        :param data_file: data file to parse
-        :param source: Source name
+        :param name: Name of the ontology.
+        :param data_file: data file to parse.
+        :param source: Source name.
         :return: None.
         """
         transform(

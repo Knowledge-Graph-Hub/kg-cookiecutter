@@ -1,4 +1,10 @@
-"""ATC transfer utility module."""
+"""ATC is the Anatomical Therapeutic Chemical Classification.
+
+We use it to categorize relationships among classes of drugs,
+with codes provided by DrugCentral.
+See details on source files here:
+https://bioportal.bioontology.org/ontologies/ATC/?p=summary
+"""
 import gzip
 import os
 import shutil
@@ -8,14 +14,6 @@ from pathlib import Path
 from koza.cli_runner import transform_source  # type: ignore
 
 from {{cookiecutter.__project_slug}}.transform_utils.transform import Transform
-
-"""
-ATC is the Anatomical Therapeutic Chemical Classification.
-We use it to categorize relationships among classes of drugs,
-with codes provided by DrugCentral.
-See details on source files here:
-https://bioportal.bioontology.org/ontologies/ATC/?p=summary
-"""
 
 ATC_SOURCES = {
     "ATC_DATA": "atc.csv.gz",
@@ -58,12 +56,12 @@ class ATCTransform(Transform):
                 self.parse(name, data_file, k)
 
     def parse(self, name: str, data_file: str, source: str) -> None:
-        """Transform ATC file with Koza.Need to decompress it first.
+        """Transform ATC file with Koza. Need to decompress it first.
 
         :param name: Name of the resource
         :param data_file: Data file of resource.
-        :param source: _description_
-        :raises ValueError: _description_
+        :param source: Source name.
+        :raises Exception: ValueError: If source file ot recognized.
         """
         print(f"Parsing {data_file}")
         config = Path(__file__).resolve().parent / ATC_CONFIGS[source]
