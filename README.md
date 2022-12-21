@@ -91,11 +91,34 @@ This should run all the bullets mentioned above under the `tox` configuration an
 And as the last line says: `congratulations :)`!! Your project is ready to evolve!
 
 # Final test to see everything is wired properly
-On the command line, type the following:
+To download sources:
+
 ```
 python run.py download
+```
+
+By default, this will read from `download.yaml` and save downloaded data to `data/raw`.
+
+To transform downloaded sources:
+
+```
 python run.py transform
+```
+
+By default, this will run all transforms defined in `transform.py` and save results to `data/transformed`.  Use the `-s` option with a transform name to run just one, e.g., `python run.py transform -s EnvoTransform`.
+
+To build the merged graph:
+
+```
 python run.py merge
 ```
 
-All three commands should work properly. They basically download transform and merge the `ENVO` ontology and `HP` ontology.
+By default, this will merge all inputs defined in `merge.py` and save results to `data/merged`. All three commands should work properly. They basically download transform and merge the `ENVO` ontology and `HP` ontology.
+
+Alternatively, run cat-merge:
+
+```
+python run.py catmerge
+```
+
+By default, this will merge all inputs in `data/transformed` and save results to `data/merged`. It also generates reports which you can find in `data/merged/qc_report.yaml` and `data/merged/qc` once the merge completes.
