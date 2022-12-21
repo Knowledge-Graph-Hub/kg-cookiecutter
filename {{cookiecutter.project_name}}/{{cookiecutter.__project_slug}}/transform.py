@@ -24,7 +24,9 @@ DATA_SOURCES = {
 }
 
 
-def transform(input_dir: Optional[str], output_dir: Optional[str], sources: List[str] = None) -> None:
+def transform(
+    input_dir: Optional[str], output_dir: Optional[str], sources: List[str] = None
+) -> None:
     """Transform based on resource and class declared in DATA_SOURCES.
     
     Call scripts in {{cookiecutter.__project_slug}}/transform/[source name]/ to
