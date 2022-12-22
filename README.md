@@ -112,4 +112,4 @@ To build the merged graph:
 kg merge
 ```
 
-By default, this will merge all inputs defined in `merge.py` and save results to `data/merged`. All three commands should work properly. They basically download transform and merge the `ENVO` ontology and `HP` ontology.
+By default, this will merge all inputs defined in `merge.py` and save results to `data/merged`. All three commands should work properly. They basically download transform and merge the `ENVO` and `HP` ontologies and the Anatomical Therapeutic Chemical Classification (ATC) dataset.
