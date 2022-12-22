@@ -19,7 +19,7 @@ from typing import Optional, Union
 
 from transform_utils.transform import Transform
 
-from {{cookiecutter.__project_slug}}.utils.robot_utils import extract_convert_to_json, convert_to_json
+from {{cookiecutter.__project_slug}}.utils.robot_utils import convert_to_json, extract_convert_to_json
 
 
 class YourTransform(Transform):
