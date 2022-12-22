@@ -17,9 +17,9 @@ import os
 from pathlib import Path
 from typing import Optional, Union
 
-from {{cookiecutter.project_name}}.{{cookiecutter.__project_slug}}.utils.robot_utils import extract_convert_to_json, convert_to_json
-
 from transform_utils.transform import Transform
+
+from {{cookiecutter.__project_slug}}.utils.robot_utils import extract_convert_to_json, convert_to_json
 
 
 class YourTransform(Transform):
@@ -69,5 +69,6 @@ class YourTransform(Transform):
         #   - TOP
         #   - BOT
         #   - MIREOT
-        extract_convert_to_json(self.input_base_dir, "NAME_OF_ONTOLOGY", self.subset_terms_file, 'ROBOT_METHOD')
-                
+        extract_convert_to_json(
+            self.input_base_dir, "NAME_OF_ONTOLOGY", self.subset_terms_file, "ROBOT_METHOD"
+        )
