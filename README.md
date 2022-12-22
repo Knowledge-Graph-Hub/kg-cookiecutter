@@ -94,7 +94,7 @@ And as the last line says: `congratulations :)`!! Your project is ready to evolv
 To download sources:
 
 ```
-python run.py download
+kg download
 ```
 
 By default, this will read from `download.yaml` and save downloaded data to `data/raw`.
@@ -102,15 +102,15 @@ By default, this will read from `download.yaml` and save downloaded data to `dat
 To transform downloaded sources:
 
 ```
-python run.py transform
+kg transform
 ```
 
-By default, this will run all transforms defined in `transform.py` and save results to `data/transformed`.  Use `-s` option with a transform name to run just one, e.g., `python run.py transform -s EnvoTransform`.
+By default, this will run all transforms defined in `transform.py` and save results to `data/transformed`.  Use `-s` option with a transform name to run just one, e.g., `kg transform -s EnvoTransform`.
 
 To build the merged graph:
 
 ```
-python run.py merge
+kg merge
 ```
 
 By default, this will merge all inputs defined in `merge.py` and save results to `data/merged`. All three commands should work properly. They basically download transform and merge the `ENVO` ontology and `HP` ontology.
@@ -118,7 +118,7 @@ By default, this will merge all inputs defined in `merge.py` and save results to
 Alternatively, run cat-merge:
 
 ```
-python run.py catmerge
+kg catmerge
 ```
 
 By default, this will merge all inputs in `data/transformed` and save results to `data/merged`. It also generates reports which you can find in `data/merged/qc_report.yaml` and `data/merged/qc` once the merge completes.
