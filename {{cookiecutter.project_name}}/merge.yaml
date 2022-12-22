@@ -4,7 +4,7 @@ configuration:
   checkpoint: false
 
 merged_graph:
-  name: project_name graph
+  name: {{cookiecutter.project_name}} graph
   source:
     hp:
       name: "HP"
@@ -30,7 +30,7 @@ merged_graph:
   operations:
     - name: kgx.graph_operations.summarize_graph.generate_graph_stats
       args:
-        graph_name: project_name graph
+        graph_name: {{cookiecutter.project_name}} graph
         filename: merged_graph_stats.yaml
         node_facet_properties:
           - provided_by
@@ -45,4 +45,4 @@ merged_graph:
     merged-kg-nt:
       format: nt
       compression: gz
-      filename: project_name.nt.gz
+      filename: {{cookiecutter.__project_slug}}.nt.gz
