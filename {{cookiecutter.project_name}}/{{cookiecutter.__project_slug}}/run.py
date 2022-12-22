@@ -1,35 +1,47 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+"""Drive KG download, transform, merge steps."""
 import os
 
 import click
+
 from {{cookiecutter.__project_slug}} import download as kg_download
-from {{cookiecutter.__project_slug}}.transform import transform as kg_transform
 from {{cookiecutter.__project_slug}}.merge_utils.merge_kg import load_and_merge
-from {{cookiecutter.__project_slug}}.query import run_query, parse_query_yaml, result_dict_to_tsv
+from {{cookiecutter.__project_slug}}.query import parse_query_yaml, result_dict_to_tsv, run_query
 from {{cookiecutter.__project_slug}}.transform import DATA_SOURCES
+from {{cookiecutter.__project_slug}}.transform import transform as kg_transform
 
 
 @click.group()
 def main():
+    """CLI."""
     pass
 
 
 @main.command()
-@click.option("yaml_file", "-y", required=True, default="download.yaml",
-              type=click.Path(exists=True))
+@click.option(
+    "yaml_file", "-y", required=True, default="download.yaml", type=click.Path(exists=True)
+)
 @click.option("output_dir", "-o", required=True, default="data/raw")
-@click.option("snippet_only", "-x", is_flag=True, default=False,
-              help='Download only the first 5 kB of each (uncompressed) source, for testing and file checks [false]')
-@click.option("ignore_cache", "-i", is_flag=True, default=False,
-              help='ignore cache and download files even if they exist [false]')
+@click.option(
+    "snippet_only",
+    "-x",
+    is_flag=True,
+    default=False,
+    help="Download only the first 5 kB of each (uncompressed) source,\
+    for testing and file checks [false]",
+)
+@click.option(
+    "ignore_cache",
+    "-i",
+    is_flag=True,
+    default=False,
+    help="ignore cache and download files even if they exist [false]",
+)
 def download(*args, **kwargs) -> None:
-    """Downloads data files from list of URLs (default: download.yaml) into data
-    directory (default: data/raw).
+    """Download from list of URLs (default: download.yaml) into data directory (default: data/raw).
 
     :param yaml_file: Specify the YAML file containing a list of datasets to download.
     :param output_dir: A string pointing to the directory to download data to.
-    :param snippet_only: Downloads only the first 5 kB of each uncompressed source, for testing and file checks.
+    :param snippet_only: Download 5 kB of each uncompressed source, for testing and file checks.
     :param ignore_cache: If specified, will ignore existing files and download again.
     :return: None
     """
@@ -41,11 +53,9 @@ def download(*args, **kwargs) -> None:
 @main.command()
 @click.option("input_dir", "-i", default="data/raw", type=click.Path(exists=True))
 @click.option("output_dir", "-o", default="data/transformed")
-@click.option("sources", "-s", default=None, multiple=True,
-              type=click.Choice(DATA_SOURCES.keys()))
+@click.option("sources", "-s", default=None, multiple=True, type=click.Choice(DATA_SOURCES.keys()))
 def transform(*args, **kwargs) -> None:
-    """Calls scripts in project_name/transform/[source name]/ to transform each source
-    into nodes and edges.
+    """Call project_name/transform/[source name]/ for node & edge transforms.
 
     :param input_dir: A string pointing to the directory to import data from.
     :param output_dir: A string pointing to the directory to output data to.
@@ -59,8 +69,8 @@ def transform(*args, **kwargs) -> None:
 
 
 @main.command()
-@click.option('yaml', '-y', default="merge.yaml", type=click.Path(exists=True))
-@click.option('processes', '-p', default=1, type=int)
+@click.option("yaml", "-y", default="merge.yaml", type=click.Path(exists=True))
+@click.option("processes", "-p", default=1, type=int)
 def merge(yaml: str, processes: int) -> None:
     """Use KGX to load subgraphs to create a merged graph.
 
@@ -74,10 +84,14 @@ def merge(yaml: str, processes: int) -> None:
 @main.command()
 @click.option("yaml", "-y", required=True, default=None, multiple=False)
 @click.option("output_dir", "-o", default="data/queries/")
-def query(yaml: str, output_dir: str,
-          query_key: str='query', endpoint_key: str='endpoint',
-          outfile_ext: str=".tsv") -> None:
-    """Perform a query of knowledge graph using a class contained in query_utils
+def query(
+    yaml: str,
+    output_dir: str,
+    query_key: str = "query",
+    endpoint_key: str = "endpoint",
+    outfile_ext: str = ".tsv",
+) -> None:
+    """Perform a query of knowledge graph using a class contained in query_utils.
 
     :param yaml: A YAML file containing a SPARQL query (see queries/sparql/ for examples)
     :param output_dir: Directory to output results of query
@@ -90,21 +104,35 @@ def query(yaml: str, output_dir: str,
     result_dict = run_query(query=query[query_key], endpoint=query[endpoint_key])
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
-    outfile = os.path.join(output_dir, os.path.splitext(os.path.basename(yaml))[0] +
-                           outfile_ext)
+    outfile = os.path.join(output_dir, os.path.splitext(os.path.basename(yaml))[0] + outfile_ext)
     result_dict_to_tsv(result_dict, outfile)
 
 
 @main.command()
-@click.option("nodes", "-n", help="nodes KGX TSV file", default="data/merged/nodes.tsv",
-              type=click.Path(exists=True))
-@click.option("edges", "-e", help="edges KGX TSV file", default="data/merged/edges.tsv",
-              type=click.Path(exists=True))
-@click.option("output_dir", "-o", help="output directory", default="data/holdouts/",
-              type=click.Path())
-@click.option("train_fraction", "-t",
-              help="fraction of input graph to use in training graph [0.8]",
-              default=0.8, type=float)
+@click.option(
+    "nodes",
+    "-n",
+    help="nodes KGX TSV file",
+    default="data/merged/nodes.tsv",
+    type=click.Path(exists=True),
+)
+@click.option(
+    "edges",
+    "-e",
+    help="edges KGX TSV file",
+    default="data/merged/edges.tsv",
+    type=click.Path(exists=True),
+)
+@click.option(
+    "output_dir", "-o", help="output directory", default="data/holdouts/", type=click.Path()
+)
+@click.option(
+    "train_fraction",
+    "-t",
+    help="fraction of input graph to use in training graph [0.8]",
+    default=0.8,
+    type=float,
+)
 @click.option("validation", "-v", help="make validation set", is_flag=True, default=False)
 def holdouts(*args, **kwargs) -> None:
     """Make holdouts for ML training.
@@ -141,7 +169,7 @@ def holdouts(*args, **kwargs) -> None:
     :param validation:     should we make validation edges? [False]
 
     """
-    #make_holdouts(*args, **kwargs)
+    # make_holdouts(*args, **kwargs)
 
 
 if __name__ == "__main__":
