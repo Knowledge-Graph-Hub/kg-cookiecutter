@@ -71,6 +71,11 @@ poetry install
 poetry self add "poetry-dynamic-versioning[plugin]"
 ```
 
+**Note**: If you are using a Linux system and the above doesn't work giving you the following error `Invalid PEP 440 version: ...`, you could alternatively run:
+```
+poetry add poetry-dynamic-versioning
+```
+
 ## Run `tox` to see if the setup works
 ```
 poetry run tox
