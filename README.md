@@ -103,7 +103,7 @@ kg download
 
 By default, this will read from `download.yaml` and save downloaded data to `data/raw`.
 
-To transform downloaded sources:
+To transform downloaded resources:
 
 ```
 kg transform
