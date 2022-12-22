@@ -17,6 +17,8 @@ import os
 from pathlib import Path
 from typing import Optional, Union
 
+from {{cookiecutter.project_name}}.{{cookiecutter.__project_slug}}.utils.robot_utils import extract_convert_to_json, convert_to_json
+
 from transform_utils.transform import Transform
 
 
@@ -30,7 +32,7 @@ class YourTransform(Transform):
 
     def run(self, data_file: Union[Optional[Path], Optional[str]] = None):
         """Run the transformation."""
-        # replace with downloaded data of for this source
+        # replace with downloaded data filename for this source
         input_file = os.path.join(self.input_base_dir, "example_data.csv")  # must exist already
 
         # make directory in data/transformed
@@ -47,9 +49,25 @@ class YourTransform(Transform):
 
             # transform data, something like:
             for line in f:
-                print(line)
-                pass
                 # transform line into nodes and edges
                 # node.write(this_node1)
                 # node.write(this_node2)
                 # edge.write(this_edge)
+                print(line)
+
+        #####################################################
+        #  If ROBOT needs to be implemented on an ontology.
+        #####################################################
+        # Convert OWL to JSON
+        convert_to_json(self.input_base_dir, "NAME_OF_ONTOLOGY")
+
+        # Get subset of ontology and save as JSON file.
+        # "subset_terms_file" could be either a CURIE
+        # or a txt file of CURIEs list
+        # ROBOT Method options:
+        #   - STAR
+        #   - TOP
+        #   - BOT
+        #   - MIREOT
+        extract_convert_to_json(self.input_base_dir, "NAME_OF_ONTOLOGY", self.subset_terms_file, 'ROBOT_METHOD')
+                
