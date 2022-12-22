@@ -1,11 +1,11 @@
 """Transform module."""
 import logging
-from typing import List, Optional
 from pathlib import Path
+from typing import List, Optional
 
+from {{cookiecutter.__project_slug}}.transform_utils.atc import ATCTransform
 from {{cookiecutter.__project_slug}}.transform_utils.ontology import OntologyTransform
 from {{cookiecutter.__project_slug}}.transform_utils.ontology.ontology_transform import ONTOLOGIES
-from {{cookiecutter.__project_slug}}.transform_utils.atc import ATCTransform
 
 DATA_SOURCES = {
     # "MondoTransform": OntologyTransform,
@@ -30,7 +30,7 @@ def transform(
     input_dir: Optional[Path], output_dir: Optional[Path], sources: List[str] = None
 ) -> None:
     """Transform based on resource and class declared in DATA_SOURCES.
-    
+
     Call scripts in {{cookiecutter.__project_slug}}/transform/[source name]/ to
     transform each source into a graph format that
     KGX can ingest directly, in either TSV or JSON format:
