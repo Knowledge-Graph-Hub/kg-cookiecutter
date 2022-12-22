@@ -23,5 +23,3 @@ def download(
         snippet_only=snippet_only,
         ignore_cache=ignore_cache,
     )
-
-    return None
