@@ -113,11 +113,3 @@ kg merge
 ```
 
 By default, this will merge all inputs defined in `merge.py` and save results to `data/merged`. All three commands should work properly. They basically download transform and merge the `ENVO` ontology and `HP` ontology.
-
-Alternatively, run cat-merge:
-
-```
-kg catmerge
-```
-
-By default, this will merge all inputs in `data/transformed` and save results to `data/merged`. It also generates reports which you can find in `data/merged/qc_report.yaml` and `data/merged/qc` once the merge completes.
