@@ -35,6 +35,9 @@ docs = [
     "myst-parser"
     ]
 
+[tool.poetry.scripts]
+kg = '{{cookiecutter.__project_slug}}.run:main'
+
 [tool.poetry-dynamic-versioning]
 enable = true
 vcs = "git"
