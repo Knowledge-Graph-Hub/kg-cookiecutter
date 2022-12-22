@@ -95,7 +95,7 @@ This should run all the bullets mentioned above under the `tox` configuration an
 And as the last line says: `congratulations :)`!! Your project is ready to evolve!
 
 # Final test to see everything is wired properly
-To download sources:
+To download resources:
 
 ```
 kg download
