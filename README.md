@@ -20,7 +20,7 @@ This kickstarts an interactive session where you declare the following:
  - `full_name`: Your name [defaults to: Harshad Hegde]
  - `email`: your email [defaults to: hhegde@lbl.gov]
  - `license`: Choose one from [`MIT`, `BSD-3`, `GNU GPL v3.0`, `Apache Software License 2.0`] [defaults to: `MIT`]
- - `github_token_for_doc_deployment`: The github token name for document deployment using `Sphinx`. [defaults to: `GH_TOKEN`]
+ - `github_token_for_doc_deployment`: The github token **variable name** for document deployment using `Sphinx`. [defaults to: `GH_TOKEN`]
 
 This will generate the project folder abiding by the template configuration specified by `kg-cookiecutter` in the [`cookiecutter.json`](https://github.com/Knowledge-Graph-Hub/kg-cookiecutter/blob/main/cookiecutter.json) file. 
 
