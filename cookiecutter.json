@@ -7,5 +7,5 @@
     "email": "hhegde@lbl.gov",
     "__author": "{{cookiecutter.full_name}} <{{cookiecutter.email}}>",
     "license": ["MIT", "BSD-3", "GNU GPL v3.0", "Apache Software License 2.0"],
-    "github_token_for_doc_deployment": "GH_TOKEN"
+    "github_token_variable_name_for_doc_deployment": "GH_TOKEN"
 }
