@@ -8,23 +8,28 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^{{cookiecutter.min_python_version}}"
-setuptools = "^65.5.0"
-tox = "^3.25.1"
-click = "^8.1.3"
-importlib = "^1.0.4"
-kghub-downloader = "^0.3.1"
-kgx = "^1.7.2"
-koza = "^0.2.1"
-biolink-model = "^3.1.2"
-sphinx = {version = "^5.3.0", extras = ["docs"]}
-sphinx-rtd-theme = {version = "^1.0.0", extras = ["docs"]}
-sphinx-autodoc-typehints = {version = "^1.19.4", extras = ["docs"]}
-sphinx-click = {version = "^4.3.0", extras = ["docs"]}
-myst-parser = {version = "^0.18.1", extras = ["docs"]}
+click = "*"
+importlib-metadata = "^4.8.0"
+kghub-downloader = "*"
+kgx = "*"
+koza = "*"
+biolink-model = "*"
 
-[tool.poetry.dev-dependencies]
-pytest = "^7.1.2"
+[tool.poetry.group.dev.dependencies]
+pytest = {version = ">=7.1.2"}
+tox = {version = ">=3.25.1"}
+pre-commit = {version = ">=3.3.3"}
 parameterized = "^0.8.1"
+
+[tool.poetry.group.docs]
+optional = true
+
+[tool.poetry.group.docs.dependencies]
+sphinx = {version = ">=6.1.3"}
+sphinx-rtd-theme = {version = ">=1.0.0"}
+sphinx-autodoc-typehints = {version = ">=1.2.0"}
+sphinx-click = {version = ">=4.3.0"}
+myst-parser = {version = ">=0.18.1"}
 
 [tool.poetry.extras]
 docs = [
@@ -47,12 +52,39 @@ style = "pep440"
 line-length = 100
 target-version = ["py38", "py39", "py310"]
 
-[tool.isort]
-profile = "black"
-multi_line_output = 3
-line_length = 100
-include_trailing_comma = true
-reverse_relative = true
+[tool.ruff]
+extend-ignore = [
+    "D211",  # `no-blank-line-before-class`
+    "D212",  # `multi-line-summary-first-line`
+    ]
+line-length = 120
+
+# Allow autofix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+
+# Select or ignore from https://beta.ruff.rs/docs/rules/
+select = [
+    "B",  # bugbear
+    "D",  # pydocstyle
+    "E",  # pycodestyle errors
+    "F",  # Pyflakes
+    "I",  # isort 
+    "S",  # flake8-bandit
+    "W",  # Warning
+]
+
+unfixable = []
+target-version = "py310"
+
+[tool.ruff.mccabe]
+# Unlike Flake8, default to a complexity level of 10.
+max-complexity = 10
+
+[tool.codespell]
+skip = "*.po,*.ts,.git,pyproject.toml"
+count = ""
+quiet-level = 3
+# ignore-words-list = ""
 
 [build-system]
 requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
