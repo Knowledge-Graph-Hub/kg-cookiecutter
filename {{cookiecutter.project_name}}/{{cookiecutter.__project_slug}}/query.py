@@ -46,7 +46,8 @@ def result_dict_to_tsv(result_dict: dict, outfile: str) -> None:
                     row_items.append(row[col]["value"])
                 except KeyError:
                     logging.error(
-                        "Problem retrieving result for col %s in row %s" % (col, "\t".join(row))
+                        "Problem retrieving result for col %s in row %s"
+                        % (col, "\t".join(row))
                     )
                     row_items.append("ERROR")
             try:
