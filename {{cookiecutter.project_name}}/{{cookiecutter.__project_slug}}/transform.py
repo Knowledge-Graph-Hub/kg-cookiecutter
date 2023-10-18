@@ -8,12 +8,7 @@ from {{cookiecutter.__project_slug}}.transform_utils.ontology import OntologyTra
 from {{cookiecutter.__project_slug}}.transform_utils.ontology.ontology_transform import ONTOLOGIES
 
 DATA_SOURCES = {
-    # "MondoTransform": OntologyTransform,
-    # "ChebiTransform": OntologyTransform,
-    "HPOTransform": OntologyTransform,
-    "ENVOTransform": OntologyTransform,
-    # "GOTransform": OntologyTransform,
-    # "OGMSTransform": OntologyTransform,
+    "OntologyTransform": OntologyTransform,
     # "DrugCentralTransform": DrugCentralTransform,
     # "OrphanetTransform": OrphanetTransform,
     # "OMIMTransform": OMIMTransform,
