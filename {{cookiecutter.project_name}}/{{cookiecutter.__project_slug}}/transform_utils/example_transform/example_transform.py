@@ -16,6 +16,7 @@ Output these two files:
 import os
 from pathlib import Path
 from typing import Optional, Union
+import requests_cache
 
 from transform_utils.transform import Transform
 
@@ -29,6 +30,9 @@ class YourTransform(Transform):
         """Instatiation part."""
         source_name = "some_unique_name"
         super().__init__(source_name, input_dir, output_dir)
+        # Any data parsed via `requests` will be cached 
+        # and consecutive executions will be quicker
+        requests_cache.install_cache("example_cache")
 
     def run(self, data_file: Union[Optional[Path], Optional[str]] = None):
         """Run the transformation."""
