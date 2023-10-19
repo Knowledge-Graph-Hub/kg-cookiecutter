@@ -38,7 +38,7 @@ class Transform:
         self.node_header = ["id", "name", "category"]
         self.edge_header = [
             "subject",
-            "edge_label",
+            "predicate",  # was "edge_label",
             "object",
             "relation",
             "provided_by",
