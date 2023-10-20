@@ -12,12 +12,6 @@ class Transform:
     DATA_DIR = Path(__file__).parent / "data"
     DEFAULT_INPUT_DIR = DATA_DIR / "raw"
     DEFAULT_OUTPUT_DIR = DATA_DIR / "transformed"
-    # NLP
-    DEFAULT_NLP_DIR = DATA_DIR / "nlp"
-    DEFAULT_NLP_TERMS_DIR = DEFAULT_NLP_DIR / "terms"
-    DEFAULT_NLP_INPUT_DIR = DEFAULT_NLP_DIR / "input"
-    DEFAULT_NLP_OUTPUT_DIR = DEFAULT_NLP_DIR / "output"
-    DEFAULT_NLP_STOPWORDS_DIR = DEFAULT_NLP_DIR / "stopwords"
 
     def __init__(
         self,
@@ -46,9 +40,7 @@ class Transform:
 
         # default dirs
         self.input_base_dir = Path(input_dir) if input_dir else self.DEFAULT_INPUT_DIR
-        self.output_base_dir = (
-            Path(output_dir) if output_dir else self.DEFAULT_OUTPUT_DIR
-        )
+        self.output_base_dir = Path(output_dir) if output_dir else self.DEFAULT_OUTPUT_DIR
         self.output_dir = self.output_base_dir / source_name
 
         # default filenames
@@ -60,12 +52,11 @@ class Transform:
         Path.mkdir(self.output_dir, exist_ok=True, parents=True)
 
         if nlp:
-
-            self.nlp_dir = self.DEFAULT_NLP_DIR
-            self.nlp_input_dir = self.DEFAULT_NLP_INPUT_DIR
-            self.nlp_output_dir = self.DEFAULT_NLP_OUTPUT_DIR
-            self.nlp_terms_dir = self.DEFAULT_NLP_TERMS_DIR
-            self.nlp_stopwords_dir = self.DEFAULT_NLP_STOPWORDS_DIR
+            self.nlp_dir = self.input_base_dir / "nlp"
+            self.nlp_input_dir = self.nlp_dir / "input"
+            self.nlp_output_dir = self.nlp_dir / "output"
+            self.nlp_terms_dir = self.nlp_dir / "terms"
+            self.nlp_stopwords_dir = self.nlp_dir / "stopwords"
 
             # Delete previously developed files
             if Path.exists(self.nlp_input_dir):
