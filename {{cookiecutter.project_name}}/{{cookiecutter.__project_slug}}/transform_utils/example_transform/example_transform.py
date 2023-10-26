@@ -16,6 +16,8 @@ Output these two files:
 import os
 from pathlib import Path
 from typing import Optional, Union
+
+from {{cookiecutter.project_name}}.{{cookiecutter.__project_slug}}.utils.pandas_utils import drop_duplicates
 import requests_cache
 
 from transform_utils.transform import Transform
@@ -76,3 +78,7 @@ class YourTransform(Transform):
         extract_convert_to_json(
             self.input_base_dir, "NAME_OF_ONTOLOGY", self.subset_terms_file, "ROBOT_METHOD"
         )
+        # Remove duplicates from nodes and edges file
+        drop_duplicates(self.output_node_file)
+        drop_duplicates(self.output_edge_file)
+
