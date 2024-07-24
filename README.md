@@ -126,7 +126,7 @@ By default, this will merge all inputs defined in `merge.py` and save results to
 
 kg-chat
 -------
-The cookiecutter also include [`kg-chat`](https://github.com/Knowledge-Graph-Hub/kg-chat) and all CLI commands run the same:
+The cookiecutter also includes [`kg-chat`](https://github.com/Knowledge-Graph-Hub/kg-chat) and all CLI commands run the same:
 
 The first step is to locate the directory containing KGX nodes and edges tsv file (say `data/`).
 
