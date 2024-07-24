@@ -38,8 +38,7 @@ class ATCTransform(Transform):
         """
         source_name = "atc"
         super().__init__(source_name, input_dir, output_dir)
-        # Any data parsed via `requests` will be cached 
-        # and consecutive executions will be quicker
+        # Any data parsed via `requests` will be cached and consecutive executions will be quicker
         requests_cache.install_cache("atc_cache")
 
     def run(self, atc_file: Union[Optional[Path], Optional[str]] = None) -> None:
