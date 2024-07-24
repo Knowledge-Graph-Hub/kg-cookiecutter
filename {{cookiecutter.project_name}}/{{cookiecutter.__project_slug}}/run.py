@@ -1,18 +1,18 @@
 """Drive KG download, transform, merge steps."""
 import os
 from pathlib import Path
+import pprint
 from typing import Union
 
 import click
+from kg_chat.implementations import Neo4jImplementation, DuckDBImplementation
+from kg_chat.main import KnowledgeGraphChat
 
 from {{cookiecutter.__project_slug}} import download as kg_download
 from {{cookiecutter.__project_slug}}.merge_utils.merge_kg import load_and_merge
 from {{cookiecutter.__project_slug}}.query import parse_query_yaml, result_dict_to_tsv, run_query
 from {{cookiecutter.__project_slug}}.transform import DATA_SOURCES
 from {{cookiecutter.__project_slug}}.transform import transform as kg_transform
-from kg_chat.cli import import_kg, test_query, show_schema, run_app, run_chat, qna
-
-
 
 database_options = click.option(
     "--database",
@@ -196,7 +196,16 @@ def holdouts(*args, **kwargs) -> None:
 @data_dir_option
 def import_kg_click(database: str = "duckdb", data_dir: str = None):
     """Run the kg-chat's demo command."""
-    import_kg(data_dir=data_dir, database=database)
+    if not data_dir:
+        raise ValueError("Data directory is required. This typically contains the KGX tsv files.")
+    if database == "neo4j":
+        impl = Neo4jImplementation(data_dir=data_dir)
+        impl.load_kg()
+    elif database == "duckdb":
+        impl = DuckDBImplementation(data_dir=data_dir)
+        impl.load_kg()
+    else:
+        raise ValueError(f"Database {database} not supported.")
 
 
 @main.command("test_query")
@@ -204,15 +213,35 @@ def import_kg_click(database: str = "duckdb", data_dir: str = None):
 @data_dir_option
 def test_query_click(database: str = "duckdb", data_dir: str = None):
     """Run the kg-chat's demo command."""
-    test_query(data_dir=data_dir, database=database)
+    if database == "neo4j":
+        impl = Neo4jImplementation(data_dir=data_dir)
+        query = "MATCH (n) RETURN n LIMIT 10"
+        result = impl.execute_query(query)
+        for record in result:
+            print(record)
+    elif database == "duckdb":
+        impl = DuckDBImplementation(data_dir=data_dir)
+        query = "SELECT * FROM nodes LIMIT 10"
+        result = impl.execute_query(query)
+        for record in result:
+            print(record)
+    else:
+        raise ValueError(f"Database {database} not supported.")
 
 
 @main.command("show_schema")
 @database_options
 @data_dir_option
 def show_schema_click(database: str = "duckdb", data_dir: str = None):
-    """Run the kg-chat's demo command."""
-    show_schema(data_dir=data_dir, database=database)
+    """Run the kg-chat's chat command."""
+    if database == "neo4j":
+        impl = Neo4jImplementation(data_dir=data_dir)
+        impl.show_schema()
+    elif database == "duckdb":
+        impl = DuckDBImplementation(data_dir=data_dir)
+        impl.show_schema()
+    else:
+        raise ValueError(f"Database {database} not supported.")
 
 
 @main.command("run_app")
@@ -220,8 +249,15 @@ def show_schema_click(database: str = "duckdb", data_dir: str = None):
 @click.option("--debug", is_flag=True, help="Run the app in debug mode.")
 @data_dir_option
 def run_app_click(database: str = "duckdb", data_dir: str = None):
-    """Run the kg-chat's demo command."""
-    run_app(data_dir=data_dir, database=database)
+    """Run the kg-chat's chat command."""
+    if database == "neo4j":
+        impl = Neo4jImplementation(data_dir=data_dir)
+        kgc = KnowledgeGraphChat(impl)
+    elif database == "duckdb":
+        impl = DuckDBImplementation(data_dir=data_dir)
+        kgc = KnowledgeGraphChat(impl)
+    else:
+        raise ValueError(f"Database {database} not supported.")
 
 
 @main.command("run_chat")
@@ -232,8 +268,17 @@ def run_chat_click(
     data_dir: str = None,
     debug: bool = False,
 ):
-    """Run the kg-chat's demo command."""
-    run_chat(data_dir=data_dir, database=database, debug=debug)
+    """Run the kg-chat's chat command."""
+    if database == "neo4j":
+        impl = Neo4jImplementation(data_dir=data_dir)
+        kgc = KnowledgeGraphChat(impl)
+        kgc.chat()
+    elif database == "duckdb":
+        impl = DuckDBImplementation(data_dir=data_dir)
+        kgc = KnowledgeGraphChat(impl)
+        kgc.chat()
+    else:
+        raise ValueError(f"Database {database} not supported.")
 
 
 @main.command("qna")
@@ -241,8 +286,17 @@ def run_chat_click(
 @click.argument("query", type=str, required=True)
 @data_dir_option
 def qna_click(query: str, data_dir: Union[str, Path], database: str = "duckdb"):
-    """Run the kg-chat's demo command."""
-    qna(query=query, data_dir=data_dir, database=database)
+    """Run the kg-chat's chat command."""
+    if database == "neo4j":
+        impl = Neo4jImplementation(data_dir=data_dir)
+        response = impl.get_human_response(query, impl)
+        pprint(response)
+    elif database == "duckdb":
+        impl = DuckDBImplementation(data_dir=data_dir)
+        response = impl.get_human_response(query)
+        pprint(response)
+    else:
+        raise ValueError(f"Database {database} not supported.")
 
 if __name__ == "__main__":
     main()
