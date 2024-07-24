@@ -7,6 +7,7 @@ from typing import Union
 import click
 from kg_chat.implementations import Neo4jImplementation, DuckDBImplementation
 from kg_chat.main import KnowledgeGraphChat
+from kg_chat.app import create_app
 
 from {{cookiecutter.__project_slug}} import download as kg_download
 from {{cookiecutter.__project_slug}}.merge_utils.merge_kg import load_and_merge
@@ -55,7 +56,8 @@ def main():
     help="ignore cache and download files even if they exist [false]",
 )
 def download(*args, **kwargs) -> None:
-    """Download from list of URLs (default: download.yaml) into data directory (default: data/raw).
+    """
+    Download from list of URLs (default: download.yaml) into data directory (default: data/raw).
 
     :param yaml_file: Specify the YAML file containing a list of datasets to download.
     :param output_dir: A string pointing to the directory to download data to.
@@ -73,7 +75,8 @@ def download(*args, **kwargs) -> None:
 @click.option("output_dir", "-o", default="data/transformed")
 @click.option("sources", "-s", default=None, multiple=True, type=click.Choice(DATA_SOURCES.keys()))
 def transform(*args, **kwargs) -> None:
-    """Call project_name/transform/[source name]/ for node & edge transforms.
+    """
+    Call project_name/transform/[source name]/ for node & edge transforms.
 
     :param input_dir: A string pointing to the directory to import data from.
     :param output_dir: A string pointing to the directory to output data to.
@@ -90,7 +93,8 @@ def transform(*args, **kwargs) -> None:
 @click.option("yaml", "-y", default="merge.yaml", type=click.Path(exists=True))
 @click.option("processes", "-p", default=1, type=int)
 def merge(yaml: str, processes: int) -> None:
-    """Use KGX to load subgraphs to create a merged graph.
+    """
+    Use KGX to load subgraphs to create a merged graph.
 
     :param yaml: A string pointing to a KGX compatible config YAML.
     :param processes: Number of processes to use.
@@ -109,7 +113,8 @@ def query(
     endpoint_key: str = "endpoint",
     outfile_ext: str = ".tsv",
 ) -> None:
-    """Perform a query of knowledge graph using a class contained in query_utils.
+    """
+    Perform a query of knowledge graph using a class contained in query_utils.
 
     :param yaml: A YAML file containing a SPARQL query (see queries/sparql/ for examples)
     :param output_dir: Directory to output results of query
@@ -153,7 +158,8 @@ def query(
 )
 @click.option("validation", "-v", help="make validation set", is_flag=True, default=False)
 def holdouts(*args, **kwargs) -> None:
-    """Make holdouts for ML training.
+    """
+    Make holdouts for ML training.
 
     Given a graph (from formatted node and edge TSVs), output positive edges and negative
     edges for use in machine learning.
@@ -248,7 +254,7 @@ def show_schema_click(database: str = "duckdb", data_dir: str = None):
 @database_options
 @click.option("--debug", is_flag=True, help="Run the app in debug mode.")
 @data_dir_option
-def run_app_click(database: str = "duckdb", data_dir: str = None):
+def run_app_click(database: str = "duckdb", data_dir: str = None, debug: bool = False):
     """Run the kg-chat's chat command."""
     if database == "neo4j":
         impl = Neo4jImplementation(data_dir=data_dir)
@@ -258,6 +264,10 @@ def run_app_click(database: str = "duckdb", data_dir: str = None):
         kgc = KnowledgeGraphChat(impl)
     else:
         raise ValueError(f"Database {database} not supported.")
+    
+    app = create_app(kgc)
+    # use_reloader=False to avoid running the app twice in debug mode
+    app.run(debug=debug, use_reloader=False)
 
 
 @main.command("chat")
