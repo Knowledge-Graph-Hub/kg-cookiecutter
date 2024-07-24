@@ -150,3 +150,4 @@ or you could launch the app locally:
 kg app --data-dir data
 ```
 
+For moer information about kg-chat commands, please [refer the documentation](https://kghub.org/kg-chat/)
