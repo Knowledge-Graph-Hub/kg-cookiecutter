@@ -8,45 +8,25 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^{{cookiecutter.min_python_version}}"
-click = "*"
-importlib-metadata = "*"
-kghub-downloader = "*"
-kgx = "*"
-koza = "*"
-biolink-model = "*"
-requests-cache = "*"
+click = ">=8.1.7"
+importlib-metadata = ">=8.2.0"
+kghub-downloader = ">=0.3.8"
+kgx = ">=2.4.2"
+koza = ">=0.6.0"
+biolink-model = ">=4.2.1"
+requests-cache = ">=1.2.1"
+sphinx = {version = "^7.4.7", extras = ["docs"]}
+sphinx-rtd-theme = {version = "^2.0.0", extras = ["docs"]}
+sphinx-autodoc-typehints = {version = "^2.2.3", extras = ["docs"]}
+sphinx-click = {version = "^6.0.0", extras = ["docs"]}
+myst-parser = {version = "^3.0.1", extras = ["docs"]}
+kg-chat = {version = ">=0.1.2", extras = ["chat"]}
 
 [tool.poetry.group.dev.dependencies]
-pytest = "*"
-tox = "*"
-pre-commit = "*"
-parameterized = "*"
-
-[tool.poetry.group.docs]
-optional = true
-
-[tool.poetry.group.docs.dependencies]
-sphinx = {version = "7.4.7"}
-sphinx-rtd-theme = {version = ">=2.0.0"}
-sphinx-autodoc-typehints = {version = ">=2.2.3"}
-sphinx-click = {version = ">=6.0.0"}
-myst-parser = {version = ">=3.0.1"}
-
-[tool.poetry.group.chatbot.dependencies]
-kg-chat = {version = ">=0.1.2"}
-
-[tool.poetry.extras]
-docs = [
-    "sphinx",
-    "sphinx-rtd-theme",
-    "sphinx-autodoc-typehints",
-    "sphinx-click",
-    "myst-parser"
-    ]
-chatbot = [
-    "kg-chat"
-]
-
+pytest = ">=8.3.1"
+tox = ">=4.16.0"
+pre-commit = ">=3.7.1"
+parameterized = ">=0.9.0"
 
 [tool.poetry.scripts]
 kg = '{{cookiecutter.__project_slug}}.run:main'
