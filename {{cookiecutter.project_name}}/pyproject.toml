@@ -9,7 +9,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^{{cookiecutter.min_python_version}}"
 click = "*"
-importlib-metadata = "^4.8.0"
+importlib-metadata = "^8.2.0"
 kghub-downloader = "*"
 kgx = "*"
 koza = "*"
@@ -26,7 +26,7 @@ parameterized = "^0.9.0"
 optional = true
 
 [tool.poetry.group.docs.dependencies]
-sphinx = {version = ">=7.4.7"}
+sphinx = {version = "7.4.7"}
 sphinx-rtd-theme = {version = ">=2.0.0"}
 sphinx-autodoc-typehints = {version = ">=2.2.3"}
 sphinx-click = {version = ">=6.0.0"}
