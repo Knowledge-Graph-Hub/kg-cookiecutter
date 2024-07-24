@@ -227,7 +227,11 @@ def run_app_click(database: str = "duckdb", data_dir: str = None):
 @main.command("run_chat")
 @database_options
 @data_dir_option
-def run_chat_click(database: str = "duckdb", data_dir: str = None, debug: bool = False,):
+def run_chat_click(
+    database: str = "duckdb",
+    data_dir: str = None,
+    debug: bool = False,
+):
     """Run the kg-chat's demo command."""
     run_chat(data_dir=data_dir, database=database, debug=debug)
 
@@ -238,7 +242,7 @@ def run_chat_click(database: str = "duckdb", data_dir: str = None, debug: bool =
 @data_dir_option
 def qna_click(query: str, data_dir: Union[str, Path], database: str = "duckdb"):
     """Run the kg-chat's demo command."""
-    qna(query=query,data_dir=data_dir, database=database)
+    qna(query=query, data_dir=data_dir, database=database)
 
 if __name__ == "__main__":
     main()

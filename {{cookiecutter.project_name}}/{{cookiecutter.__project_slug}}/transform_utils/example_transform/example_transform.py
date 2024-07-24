@@ -1,4 +1,5 @@
-"""Template design.
+"""
+Template design.
 
 Example script to transform downloaded data into a graph format that KGX can ingest directly,
 in either TSV or JSON format:
@@ -13,6 +14,7 @@ Output these two files:
 - nodes.tsv
 - edges.tsv
 """
+
 import os
 from pathlib import Path
 from typing import Optional, Union
@@ -29,7 +31,7 @@ class YourTransform(Transform):
     """Template for how the transform class would be designed."""
 
     def __init__(self, input_dir: Optional[Path] = None, output_dir: Optional[Path] = None):
-        """Instatiation part."""
+        """Instatiate class."""
         source_name = "some_unique_name"
         super().__init__(source_name, input_dir, output_dir)
         # Any data parsed via `requests` will be cached
