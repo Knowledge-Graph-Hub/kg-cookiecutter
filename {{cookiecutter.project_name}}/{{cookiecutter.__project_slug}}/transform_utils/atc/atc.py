@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Optional, Union
 import requests_cache
 
-from koza.cli_runner import transform_source  # type: ignore
+from koza.cli_utils import transform_source  # type: ignore
 
 from {{cookiecutter.__project_slug}}.transform_utils.transform import Transform
 
