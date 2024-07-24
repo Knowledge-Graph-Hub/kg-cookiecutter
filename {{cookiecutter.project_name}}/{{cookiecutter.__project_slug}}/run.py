@@ -208,7 +208,7 @@ def import_kg_click(database: str = "duckdb", data_dir: str = None):
         raise ValueError(f"Database {database} not supported.")
 
 
-@main.command("test_query")
+@main.command("test-query")
 @database_options
 @data_dir_option
 def test_query_click(database: str = "duckdb", data_dir: str = None):
@@ -229,7 +229,7 @@ def test_query_click(database: str = "duckdb", data_dir: str = None):
         raise ValueError(f"Database {database} not supported.")
 
 
-@main.command("show_schema")
+@main.command("show-schema")
 @database_options
 @data_dir_option
 def show_schema_click(database: str = "duckdb", data_dir: str = None):
@@ -244,7 +244,7 @@ def show_schema_click(database: str = "duckdb", data_dir: str = None):
         raise ValueError(f"Database {database} not supported.")
 
 
-@main.command("run_app")
+@main.command("app")
 @database_options
 @click.option("--debug", is_flag=True, help="Run the app in debug mode.")
 @data_dir_option
@@ -260,7 +260,7 @@ def run_app_click(database: str = "duckdb", data_dir: str = None):
         raise ValueError(f"Database {database} not supported.")
 
 
-@main.command("run_chat")
+@main.command("chat")
 @database_options
 @data_dir_option
 def run_chat_click(
