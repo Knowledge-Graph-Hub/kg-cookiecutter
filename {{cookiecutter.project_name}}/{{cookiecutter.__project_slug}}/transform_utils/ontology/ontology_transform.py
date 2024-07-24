@@ -18,6 +18,7 @@ ONTOLOGIES = {
 
 
 class OntologyTransform(Transform):
+
     """OntologyTransform parses an Obograph JSON form of an Ontology into nodes nad edges."""
 
     def __init__(
@@ -28,7 +29,8 @@ class OntologyTransform(Transform):
         super().__init__(source_name, input_dir, output_dir)
 
     def run(self, data_file: Union[Optional[Path], Optional[str]] = None) -> None:
-        """Transform an ontology.
+        """
+        Transform an ontology.
 
         :param data_file: data file to parse
         :return: None.
@@ -44,7 +46,8 @@ class OntologyTransform(Transform):
                 self.parse(k, data_file, k)
 
     def parse(self, name: str, data_file: Optional[Path], source: str) -> None:
-        """Process the data_file.
+        """
+        Process the data_file.
 
         :param name: Name of the ontology.
         :param data_file: data file to parse.
