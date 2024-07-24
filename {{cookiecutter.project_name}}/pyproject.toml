@@ -27,7 +27,7 @@ optional = true
 
 [tool.poetry.group.docs.dependencies]
 sphinx = {version = ">=7.4.7"}
-sphinx-rtd-theme = {version = ">=2.1.0"}
+sphinx-rtd-theme = {version = ">=2.0.0"}
 sphinx-autodoc-typehints = {version = ">=2.2.3"}
 sphinx-click = {version = ">=6.0.0"}
 myst-parser = {version = ">=3.0.1"}
