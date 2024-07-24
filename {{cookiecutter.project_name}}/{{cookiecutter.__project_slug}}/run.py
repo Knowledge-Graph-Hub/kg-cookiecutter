@@ -1,13 +1,14 @@
 """Drive KG download, transform, merge steps."""
+
 import os
 from pathlib import Path
 from pprint import pprint
 from typing import Union
 
 import click
-from kg_chat.implementations import Neo4jImplementation, DuckDBImplementation
-from kg_chat.main import KnowledgeGraphChat
 from kg_chat.app import create_app
+from kg_chat.implementations import DuckDBImplementation, Neo4jImplementation
+from kg_chat.main import KnowledgeGraphChat
 
 from {{cookiecutter.__project_slug}} import download as kg_download
 from {{cookiecutter.__project_slug}}.merge_utils.merge_kg import load_and_merge
