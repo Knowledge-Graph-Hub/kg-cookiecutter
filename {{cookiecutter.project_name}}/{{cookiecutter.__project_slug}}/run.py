@@ -1,5 +1,7 @@
 """Drive KG download, transform, merge steps."""
 import os
+from pathlib import Path
+from typing import Union
 
 import click
 
@@ -8,7 +10,23 @@ from {{cookiecutter.__project_slug}}.merge_utils.merge_kg import load_and_merge
 from {{cookiecutter.__project_slug}}.query import parse_query_yaml, result_dict_to_tsv, run_query
 from {{cookiecutter.__project_slug}}.transform import DATA_SOURCES
 from {{cookiecutter.__project_slug}}.transform import transform as kg_transform
+from kg_chat.cli import import_kg, test_query, show_schema, run_app, run_chat, qna
 
+
+
+database_options = click.option(
+    "--database",
+    "-d",
+    type=click.Choice(["neo4j", "duckdb"], case_sensitive=False),
+    help="Database to use.",
+    default="duckdb",
+)
+data_dir_option = click.option(
+    "--data-dir",
+    type=click.Path(exists=True, file_okay=False, dir_okay=True),
+    help="Directory containing the data.",
+    required=True,
+)
 
 @click.group()
 def main():
@@ -170,7 +188,57 @@ def holdouts(*args, **kwargs) -> None:
 
     """
     # make_holdouts(*args, **kwargs)
+    pass
 
+# ! kg-chat must be installed for these CLI commands to work.
+@main.command("import")
+@database_options
+@data_dir_option
+def import_kg_click(database: str = "duckdb", data_dir: str = None):
+    """Run the kg-chat's demo command."""
+    import_kg(data_dir=data_dir, database=database)
+
+
+@main.command("test_query")
+@database_options
+@data_dir_option
+def test_query_click(database: str = "duckdb", data_dir: str = None):
+    """Run the kg-chat's demo command."""
+    test_query(data_dir=data_dir, database=database)
+
+
+@main.command("show_schema")
+@database_options
+@data_dir_option
+def show_schema_click(database: str = "duckdb", data_dir: str = None):
+    """Run the kg-chat's demo command."""
+    show_schema(data_dir=data_dir, database=database)
+
+
+@main.command("run_app")
+@database_options
+@click.option("--debug", is_flag=True, help="Run the app in debug mode.")
+@data_dir_option
+def run_app_click(database: str = "duckdb", data_dir: str = None):
+    """Run the kg-chat's demo command."""
+    run_app(data_dir=data_dir, database=database)
+
+
+@main.command("run_chat")
+@database_options
+@data_dir_option
+def run_chat_click(database: str = "duckdb", data_dir: str = None, debug: bool = False,):
+    """Run the kg-chat's demo command."""
+    run_chat(data_dir=data_dir, database=database, debug=debug)
+
+
+@main.command("qna")
+@database_options
+@click.argument("query", type=str, required=True)
+@data_dir_option
+def qna_click(query: str, data_dir: Union[str, Path], database: str = "duckdb"):
+    """Run the kg-chat's demo command."""
+    qna(query=query,data_dir=data_dir, database=database)
 
 if __name__ == "__main__":
     main()
