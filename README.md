@@ -154,7 +154,7 @@ kg import --data-dir data
 
 You are all set!!!
 
-To query the graph using the interactive chart tool using:
+To query the graph using the interactive chat tool using:
 
 ```shell
 kg chat --data-dir data
