@@ -124,18 +124,33 @@ kg merge
 
 By default, this will merge all inputs defined in `merge.py` and save results to `data/merged`. All three commands should work properly. They basically download transform and merge the `ENVO` and `HP` ontologies and the Anatomical Therapeutic Chemical Classification (`ATC`) dataset.
 
-kg-chat
--------
-The cookiecutter also includes [`kg-chat`](https://github.com/Knowledge-Graph-Hub/kg-chat) and all CLI commands run the same:
+# kg-chat (optional package)
+
+The cookiecutter also includes [`kg-chat`](https://github.com/Knowledge-Graph-Hub/kg-chat) and all CLI commands run the same.
+
+## Requirements
+
+- OpenAI key saved as a local environmental variable
+  ```shell
+  export OPENAI_API_KEY=XXXXX
+  ```
+
+It is available as an optional dependency and to avail this feature run:
+
+```shell
+poetry install -E chat
+```
 
 The first step is to locate the directory containing KGX nodes and edges tsv file (say `data/`).
 
-Then, import the data:
+Then, import the nodes and edges file from this `data` directory:
 
 ```shell
 kg import --data-dir data
 ```
-This imports the nodes and edges tsv file into a `duckdb` database.
+> **_NOTE:_**  
+> The file names should be `nodes.tsv` and `edges.tsv`. (We may make it flexible in the future)
+
 
 You are all set!!!
 
