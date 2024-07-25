@@ -149,7 +149,7 @@ Then, import the nodes and edges file from this `data` directory:
 kg import --data-dir data
 ```
 > **_NOTE:_**  
-> The file names should be `nodes.tsv` and `edges.tsv`. (We may make it flexible in the future)
+> The file names should be named `nodes.tsv` and `edges.tsv`. (We may make it flexible in the future)
 
 
 You are all set!!!
