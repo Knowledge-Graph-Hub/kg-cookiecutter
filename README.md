@@ -160,7 +160,7 @@ To query the graph using the interactive chat tool using:
 kg chat --data-dir data
 ```
 
-or you could launch the app locally:
+or you could launch an app locally:
 ```shell
 kg app --data-dir data
 ```
