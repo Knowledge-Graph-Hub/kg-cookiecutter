@@ -15,18 +15,22 @@ kgx = ">=2.4.2"
 koza = ">=0.6.0"
 biolink-model = ">=4.2.1"
 requests-cache = ">=1.2.1"
-sphinx = {version = "^7.4.7", extras = ["docs"]}
-sphinx-rtd-theme = {version = "^2.0.0", extras = ["docs"]}
-sphinx-autodoc-typehints = {version = "^2.2.3", extras = ["docs"]}
-sphinx-click = {version = "^6.0.0", extras = ["docs"]}
-myst-parser = {version = "^3.0.1", extras = ["docs"]}
-kg-chat = {version = ">=0.1.2", extras = ["chat"]}
+sphinx = {version = "^7.4.7", extras = ["docs"], optional = true }
+sphinx-rtd-theme = {version = "^2.0.0", extras = ["docs"], optional = true }
+sphinx-autodoc-typehints = {version = "^2.2.3", extras = ["docs"], optional = true }
+sphinx-click = {version = "^6.0.0", extras = ["docs"], optional = true }
+myst-parser = {version = "^3.0.1", extras = ["docs"], optional = true }
+kg-chat = {version = ">=0.1.2", extras = ["chat"], optional = true }
 
 [tool.poetry.group.dev.dependencies]
 pytest = ">=8.3.1"
 tox = ">=4.16.0"
 pre-commit = ">=3.7.1"
 parameterized = ">=0.9.0"
+
+[tool.poetry.extras]
+docs = ["sphinx", "sphinx-rtd-theme", "sphinx-autodoc-typehints", "sphinx-click", "myst-parser"]
+chat = ["kg-chat"]
 
 [tool.poetry.scripts]
 kg = '{{cookiecutter.__project_slug}}.run:main'
