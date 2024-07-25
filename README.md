@@ -126,7 +126,7 @@ By default, this will merge all inputs defined in `merge.py` and save results to
 
 # kg-chat (optional package)
 
-The cookiecutter also includes [`kg-chat`](https://github.com/Knowledge-Graph-Hub/kg-chat) and all CLI commands run the same.
+The cookiecutter also includes [`kg-chat`](https://github.com/Knowledge-Graph-Hub/kg-chat) as an optional dependency and all CLI commands run the same.
 
 ## Requirements
 
@@ -135,7 +135,7 @@ The cookiecutter also includes [`kg-chat`](https://github.com/Knowledge-Graph-Hu
   export OPENAI_API_KEY=XXXXX
   ```
 
-It is available as an optional dependency and to avail this feature run:
+To install `kg-chat` package and its dependencies run:
 
 ```shell
 poetry install -E chat
