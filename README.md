@@ -141,7 +141,7 @@ It is available as an optional dependency and to avail this feature run:
 poetry install -E chat
 ```
 
-The first step is to locate the directory containing KGX nodes and edges tsv file (say `data/`).
+The first step is to create a directory containing KGX nodes and edges tsv file (say `data/`).
 
 Then, import the nodes and edges file from this `data` directory:
 
