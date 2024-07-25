@@ -165,4 +165,4 @@ or you could launch an app locally:
 kg app --data-dir data
 ```
 
-For moer information about kg-chat commands, please [refer the documentation](https://kghub.org/kg-chat/)
+For more information about kg-chat commands, please [refer the documentation](https://kghub.org/kg-chat/)
