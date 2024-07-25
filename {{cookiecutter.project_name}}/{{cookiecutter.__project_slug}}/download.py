@@ -5,7 +5,8 @@ from kghub_downloader.download_utils import download_from_yaml  # type: ignore
 def download(
     yaml_file: str, output_dir: str, snippet_only: bool, ignore_cache: bool = False
 ) -> None:
-    """Download data files from list of URLs.
+    """
+    Download data files from list of URLs.
 
     DL based on config (default: download.yaml)
     into data directory (default: data/).

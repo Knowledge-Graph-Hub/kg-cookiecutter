@@ -1,4 +1,5 @@
-"""ATC entities.
+"""
+ATC entities.
 
 Some ATC codes are single letters, to denote top-level parents
 Those will have parents of http://www.w3.org/2002/07/owl#Thing

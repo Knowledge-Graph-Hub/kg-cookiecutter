@@ -7,6 +7,7 @@ import yaml
 
 
 class Transform:
+
     """Parent class for transforms, that sets up a lot of default file info."""
 
     DATA_DIR = Path(__file__).parent / "data"
@@ -20,7 +21,8 @@ class Transform:
         output_dir: Optional[Path] = None,
         nlp: bool = False,
     ):
-        """Instantiate Transform object.
+        """
+        Instantiate Transform object.
 
         :param source_name: Name of resource.
         :param input_dir: Location of input directory, defaults to None
@@ -40,7 +42,9 @@ class Transform:
 
         # default dirs
         self.input_base_dir = Path(input_dir) if input_dir else self.DEFAULT_INPUT_DIR
-        self.output_base_dir = Path(output_dir) if output_dir else self.DEFAULT_OUTPUT_DIR
+        self.output_base_dir = (
+            Path(output_dir) if output_dir else self.DEFAULT_OUTPUT_DIR
+        )
         self.output_dir = self.output_base_dir / source_name
 
         # default filenames
@@ -81,14 +85,16 @@ class Transform:
             self.output_nlp_file = self.nlp_output_dir / "nlpOutput.tsv"
 
     def run(self, data_file: Union[Optional[Path], Optional[str]] = None):
-        """Run the transform.
+        """
+        Run the transform.
 
         :param data_file: Input data file, defaults to None
         """
         pass
 
     def pass_through(self, nodes_file: str, edges_file: str) -> None:
-        """Copy nodes and edges files to output directory.
+        """
+        Copy nodes and edges files to output directory.
 
         :param nodes_file: nodes files to take from raw directory and put in transform
                 directory

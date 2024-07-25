@@ -1,7 +1,21 @@
 """Drive KG download, transform, merge steps."""
+
 import os
+from pathlib import Path
+from pprint import pprint
+from typing import Union
 
 import click
+try:
+    from kg_chat.app import create_app
+    from kg_chat.implementations import DuckDBImplementation, Neo4jImplementation
+    from kg_chat.main import KnowledgeGraphChat
+except ImportError:
+    # Handle the case where kg-chat is not installed
+    create_app = None
+    DuckDBImplementation = None
+    Neo4jImplementation = None
+    KnowledgeGraphChat = None
 
 from {{cookiecutter.__project_slug}} import download as kg_download
 from {{cookiecutter.__project_slug}}.merge_utils.merge_kg import load_and_merge
@@ -9,6 +23,19 @@ from {{cookiecutter.__project_slug}}.query import parse_query_yaml, result_dict_
 from {{cookiecutter.__project_slug}}.transform import DATA_SOURCES
 from {{cookiecutter.__project_slug}}.transform import transform as kg_transform
 
+database_options = click.option(
+    "--database",
+    "-d",
+    type=click.Choice(["neo4j", "duckdb"], case_sensitive=False),
+    help="Database to use.",
+    default="duckdb",
+)
+data_dir_option = click.option(
+    "--data-dir",
+    type=click.Path(exists=True, file_okay=False, dir_okay=True),
+    help="Directory containing the data.",
+    required=True,
+)
 
 @click.group()
 def main():
@@ -37,7 +64,8 @@ def main():
     help="ignore cache and download files even if they exist [false]",
 )
 def download(*args, **kwargs) -> None:
-    """Download from list of URLs (default: download.yaml) into data directory (default: data/raw).
+    """
+    Download from list of URLs (default: download.yaml) into data directory (default: data/raw).
 
     :param yaml_file: Specify the YAML file containing a list of datasets to download.
     :param output_dir: A string pointing to the directory to download data to.
@@ -55,7 +83,8 @@ def download(*args, **kwargs) -> None:
 @click.option("output_dir", "-o", default="data/transformed")
 @click.option("sources", "-s", default=None, multiple=True, type=click.Choice(DATA_SOURCES.keys()))
 def transform(*args, **kwargs) -> None:
-    """Call project_name/transform/[source name]/ for node & edge transforms.
+    """
+    Call project_name/transform/[source name]/ for node & edge transforms.
 
     :param input_dir: A string pointing to the directory to import data from.
     :param output_dir: A string pointing to the directory to output data to.
@@ -72,7 +101,8 @@ def transform(*args, **kwargs) -> None:
 @click.option("yaml", "-y", default="merge.yaml", type=click.Path(exists=True))
 @click.option("processes", "-p", default=1, type=int)
 def merge(yaml: str, processes: int) -> None:
-    """Use KGX to load subgraphs to create a merged graph.
+    """
+    Use KGX to load subgraphs to create a merged graph.
 
     :param yaml: A string pointing to a KGX compatible config YAML.
     :param processes: Number of processes to use.
@@ -91,7 +121,8 @@ def query(
     endpoint_key: str = "endpoint",
     outfile_ext: str = ".tsv",
 ) -> None:
-    """Perform a query of knowledge graph using a class contained in query_utils.
+    """
+    Perform a query of knowledge graph using a class contained in query_utils.
 
     :param yaml: A YAML file containing a SPARQL query (see queries/sparql/ for examples)
     :param output_dir: Directory to output results of query
@@ -135,11 +166,12 @@ def query(
 )
 @click.option("validation", "-v", help="make validation set", is_flag=True, default=False)
 def holdouts(*args, **kwargs) -> None:
-    """Make holdouts for ML training.
+    """
+    Make holdouts for ML training.
 
     Given a graph (from formatted node and edge TSVs), output positive edges and negative
     edges for use in machine learning.
-    
+
     To generate positive edges: a set of test positive edges equal in number to
     [(1 - train_fraction) * number of edges in input graph] are randomly selected from
     the edges in the input graph that is not part of a minimal spanning tree, such that
@@ -170,6 +202,112 @@ def holdouts(*args, **kwargs) -> None:
 
     """
     # make_holdouts(*args, **kwargs)
+    pass
+
+if create_app:
+    # ! kg-chat must be installed for these CLI commands to work.
+    
+    @main.command("import")
+    @database_options
+    @data_dir_option
+    def import_kg_click(database: str = "duckdb", data_dir: str = None):
+        """Run the kg-chat's demo command."""
+        if not data_dir:
+            raise ValueError("Data directory is required. This typically contains the KGX tsv files.")
+        if database == "neo4j":
+            impl = Neo4jImplementation(data_dir=data_dir)
+            impl.load_kg()
+        elif database == "duckdb":
+            impl = DuckDBImplementation(data_dir=data_dir)
+            impl.load_kg()
+        else:
+            raise ValueError(f"Database {database} not supported.")
+
+    @main.command("test-query")
+    @database_options
+    @data_dir_option
+    def test_query_click(database: str = "duckdb", data_dir: str = None):
+        """Run the kg-chat's demo command."""
+        if database == "neo4j":
+            impl = Neo4jImplementation(data_dir=data_dir)
+            query = "MATCH (n) RETURN n LIMIT 10"
+            result = impl.execute_query(query)
+            for record in result:
+                print(record)
+        elif database == "duckdb":
+            impl = DuckDBImplementation(data_dir=data_dir)
+            query = "SELECT * FROM nodes LIMIT 10"
+            result = impl.execute_query(query)
+            for record in result:
+                print(record)
+        else:
+            raise ValueError(f"Database {database} not supported.")
+
+    @main.command("show-schema")
+    @database_options
+    @data_dir_option
+    def show_schema_click(database: str = "duckdb", data_dir: str = None):
+        """Run the kg-chat's chat command."""
+        if database == "neo4j":
+            impl = Neo4jImplementation(data_dir=data_dir)
+            impl.show_schema()
+        elif database == "duckdb":
+            impl = DuckDBImplementation(data_dir=data_dir)
+            impl.show_schema()
+        else:
+            raise ValueError(f"Database {database} not supported.")
+
+    @main.command("app")
+    @database_options
+    @click.option("--debug", is_flag=True, help="Run the app in debug mode.")
+    @data_dir_option
+    def run_app_click(database: str = "duckdb", data_dir: str = None, debug: bool = False):
+        """Run the kg-chat's chat command."""
+        if database == "neo4j":
+            impl = Neo4jImplementation(data_dir=data_dir)
+            kgc = KnowledgeGraphChat(impl)
+        elif database == "duckdb":
+            impl = DuckDBImplementation(data_dir=data_dir)
+            kgc = KnowledgeGraphChat(impl)
+        else:
+            raise ValueError(f"Database {database} not supported.")
+        
+        app = create_app(kgc)
+        # use_reloader=False to avoid running the app twice in debug mode
+        app.run(debug=debug, use_reloader=False)
+
+    @main.command("chat")
+    @database_options
+    @data_dir_option
+    def run_chat_click(database: str = "duckdb", data_dir: str = None, debug: bool = False):
+        """Run the kg-chat's chat command."""
+        if database == "neo4j":
+            impl = Neo4jImplementation(data_dir=data_dir)
+            kgc = KnowledgeGraphChat(impl)
+            kgc.chat()
+        elif database == "duckdb":
+            impl = DuckDBImplementation(data_dir=data_dir)
+            kgc = KnowledgeGraphChat(impl)
+            kgc.chat()
+        else:
+            raise ValueError(f"Database {database} not supported.")
+
+    @main.command("qna")
+    @database_options
+    @click.argument("query", type=str, required=True)
+    @data_dir_option
+    def qna_click(query: str, data_dir: Union[str, Path], database: str = "duckdb"):
+        """Run the kg-chat's chat command."""
+        if database == "neo4j":
+            impl = Neo4jImplementation(data_dir=data_dir)
+            response = impl.get_human_response(query, impl)
+            pprint(response)
+        elif database == "duckdb":
+            impl = DuckDBImplementation(data_dir=data_dir)
+            response = impl.get_human_response(query)
+            pprint(response)
+        else:
+            raise ValueError(f"Database {database} not supported.")
 
 
 if __name__ == "__main__":

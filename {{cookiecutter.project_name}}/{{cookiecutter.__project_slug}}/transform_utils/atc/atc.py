@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Optional, Union
 import requests_cache
 
-from koza.cli_runner import transform_source  # type: ignore
+from koza.cli_utils import transform_source  # type: ignore
 
 from {{cookiecutter.__project_slug}}.transform_utils.transform import Transform
 
@@ -38,8 +38,7 @@ class ATCTransform(Transform):
         """
         source_name = "atc"
         super().__init__(source_name, input_dir, output_dir)
-        # Any data parsed via `requests` will be cached 
-        # and consecutive executions will be quicker
+        # Any data parsed via `requests` will be cached and consecutive executions will be quicker
         requests_cache.install_cache("atc_cache")
 
     def run(self, atc_file: Union[Optional[Path], Optional[str]] = None) -> None:
