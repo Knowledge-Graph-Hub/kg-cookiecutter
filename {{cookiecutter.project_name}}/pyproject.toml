@@ -14,13 +14,12 @@ kghub-downloader = ">=0.3.8"
 kgx = ">=2.4.2"
 koza = ">=0.6.0"
 biolink-model = ">=4.2.1"
-requests-cache = ">=1.2.1"
 sphinx = {version = "^7.4.7", extras = ["docs"], optional = true }
 sphinx-rtd-theme = {version = "^2.0.0", extras = ["docs"], optional = true }
 sphinx-autodoc-typehints = {version = "^2.2.3", extras = ["docs"], optional = true }
 sphinx-click = {version = "^6.0.0", extras = ["docs"], optional = true }
 myst-parser = {version = "^3.0.1", extras = ["docs"], optional = true }
-kg-chat = {version = ">=0.1.2", extras = ["chat"], optional = true }
+kg-chat = {version = ">=0.1.3", extras = ["chat"], optional = true }
 
 [tool.poetry.group.dev.dependencies]
 pytest = ">=8.3.1"
