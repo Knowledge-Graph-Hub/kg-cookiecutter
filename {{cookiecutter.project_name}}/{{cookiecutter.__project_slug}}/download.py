@@ -12,7 +12,6 @@ def download(
     into data directory (default: data/).
 
     :param yaml_file: A string pointing to the yaml file
-    :param utilized to facilitate the downloading of data.
     :param output_dir: A string pointing to the location to download data to.
     :param snippet_only: Downloads only the first 5 kB of the source,for testing and file checks.
     :param ignore_cache: Ignore cache and download files even if they exist [false]
